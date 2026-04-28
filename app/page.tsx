@@ -99,12 +99,12 @@ export default function HomePage() {
 
             {/* ── Left ── */}
             <div className="flex-1 max-w-2xl">
-              <motion.div variants={item}>
+              {/* <motion.div variants={item}>
                 <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sage/12 text-sage text-xs font-bold tracking-widest uppercase mb-8">
                   <span className="w-1.5 h-1.5 rounded-sm bg-sage animate-pulse" />
                   Digital Agency · Pakistan & UAE
                 </span>
-              </motion.div>
+              </motion.div> */}
 
               <motion.h1 variants={item}
                 className="font-black text-charcoal uppercase leading-[0.9] tracking-tight mb-6"
