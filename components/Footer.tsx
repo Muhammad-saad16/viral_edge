@@ -3,17 +3,16 @@ import Logo from "./Logo";
 
 const quickLinks = [
   { href: "/",               label: "Home"          },
-  { href: "/meet-the-squad", label: "Meet The Squad"},
-  { href: "/portfolio",      label: "Portfolio"     },
+  { href: "/portfolio",      label: "Work"          },
   { href: "/services",       label: "Services"      },
-  { href: "/post-for-rent",  label: "Post For Rent" },
-  { href: "/contact",        label: "Contact Us"    },
+  { href: "/process",        label: "Process"       },
+  { href: "/meet-the-squad", label: "The Squad"     },
+  { href: "/contact",        label: "Talk to Us"    },
 ];
 
 export default function Footer() {
   return (
     <footer className="bg-charcoal text-white">
-      {/* Top border accent */}
       <div className="h-0.5 bg-gradient-to-r from-sage via-orange to-sage opacity-60" />
 
       <div className="max-w-7xl mx-auto px-5 lg:px-10 py-16">
@@ -23,8 +22,7 @@ export default function Footer() {
           <div>
             <Logo className="h-9 w-auto mb-5" variant="light" />
             <p className="text-sm text-white/40 leading-relaxed max-w-xs">
-              A digital agency built for brands that refuse to be average.
-              Strategy, content, and growth — all under one roof.
+              Built for brands that refuse average. We handle strategy, content, and growth, all under one roof.
             </p>
             <div className="flex gap-3 mt-6">
               {[
@@ -36,7 +34,8 @@ export default function Footer() {
                   key={s.label}
                   href={s.href}
                   aria-label={s.label}
-                  className="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center text-xs font-bold text-white/45 hover:border-sage hover:text-sage hover:bg-sage/10 transition-all"
+                  className="w-9 h-9 border border-white/15 flex items-center justify-center text-xs font-bold text-white/45 hover:border-sage hover:text-sage hover:bg-sage/10 transition-all"
+                  style={{ borderRadius: "4px" }}
                 >
                   {s.label}
                 </a>
@@ -63,18 +62,18 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Get In Touch */}
+          {/* Contact */}
           <div>
             <h4 className="text-[10px] font-black tracking-[0.2em] uppercase text-white/30 mb-6">
-              Get In Touch
+              Let&apos;s Talk
             </h4>
             <address className="not-italic space-y-3 text-sm text-white/45">
               <p className="leading-relaxed">
                 38 26TH Street, Block 4<br />
-                Clifton, Karachi City, Sindh 75000
+                Clifton, Karachi, Pakistan
               </p>
               <p>
-                <span className="text-white/25 text-xs">Phone</span><br />
+                <span className="text-white/25 text-xs">Pakistan</span><br />
                 021 35395533
               </p>
               <p>
@@ -87,10 +86,10 @@ export default function Footer() {
 
         <div className="mt-12 pt-6 border-t border-white/8 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-xs text-white/20">
-            © ViralEdge 2024. All rights reserved.
+            &copy; SQRD Digital 2025. All rights reserved.
           </p>
           <p className="text-xs text-white/15">
-            Karachi, Pakistan
+            Karachi, Pakistan &amp; UAE
           </p>
         </div>
       </div>

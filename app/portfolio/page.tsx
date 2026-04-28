@@ -10,24 +10,24 @@ const clients = [
 ];
 
 const projects = [
-  { title: "Jeeviez Kitchen",   cat: "Branding",   size: "large",  bg: "#E07A3B", accent: "#E07A3B" },
-  { title: "Pepsi",             cat: "Content",    size: "normal", bg: "#7A9E7E", accent: "#7A9E7E" },
-  { title: "Mortein",           cat: "Digital",    size: "normal", bg: "#2C2C2C", accent: "#2C2C2C" },
-  { title: "Pepsico",           cat: "Social",     size: "normal", bg: "#E07A3B", accent: "#E07A3B" },
-  { title: "Pepsi Ramzan",      cat: "Video",      size: "large",  bg: "#7A9E7E", accent: "#7A9E7E" },
-  { title: "No-No",             cat: "Ads",        size: "normal", bg: "#5C7E60", accent: "#5C7E60" },
-  { title: "Sunsilk",           cat: "Branding",   size: "normal", bg: "#7A9E7E", accent: "#7A9E7E" },
-  { title: "Knorr",             cat: "Content",    size: "normal", bg: "#E07A3B", accent: "#E07A3B" },
-  { title: "Layers",            cat: "Design",     size: "normal", bg: "#2C2C2C", accent: "#2C2C2C" },
-  { title: "J. Junaid Jamshed", cat: "Video",      size: "large",  bg: "#7A9E7E", accent: "#7A9E7E" },
-  { title: "Tapal 70 Years",    cat: "Campaign",   size: "normal", bg: "#E07A3B", accent: "#E07A3B" },
-  { title: "Tapal",             cat: "Social",     size: "normal", bg: "#5C7E60", accent: "#5C7E60" },
-  { title: "Sooper",            cat: "Branding",   size: "normal", bg: "#2C2C2C", accent: "#2C2C2C" },
-  { title: "5 Rupees Band",     cat: "Performance",size: "normal", bg: "#E07A3B", accent: "#E07A3B" },
-  { title: "Almirah",           cat: "Design",     size: "normal", bg: "#7A9E7E", accent: "#7A9E7E" },
-  { title: "Tapal Mezban",      cat: "Video",      size: "normal", bg: "#2C2C2C", accent: "#2C2C2C" },
-  { title: "EBM",               cat: "Content",    size: "normal", bg: "#E07A3B", accent: "#E07A3B" },
-  { title: "Yuc! Bites",        cat: "Social",     size: "normal", bg: "#7A9E7E", accent: "#7A9E7E" },
+  { title: "Jeeviez Kitchen",   cat: "Branding",   size: "large",  bg: "#ff6400", accent: "#ff6400" },
+  { title: "Pepsi",             cat: "Content",    size: "normal", bg: "#546b52", accent: "#546b52" },
+  { title: "Mortein",           cat: "Digital",    size: "normal", bg: "#1a1a1a", accent: "#1a1a1a" },
+  { title: "Pepsico",           cat: "Social",     size: "normal", bg: "#ff6400", accent: "#ff6400" },
+  { title: "Pepsi Ramzan",      cat: "Video",      size: "large",  bg: "#546b52", accent: "#546b52" },
+  { title: "No-No",             cat: "Ads",        size: "normal", bg: "#3a4e39", accent: "#3a4e39" },
+  { title: "Sunsilk",           cat: "Branding",   size: "normal", bg: "#546b52", accent: "#546b52" },
+  { title: "Knorr",             cat: "Content",    size: "normal", bg: "#ff6400", accent: "#ff6400" },
+  { title: "Layers",            cat: "Design",     size: "normal", bg: "#1a1a1a", accent: "#1a1a1a" },
+  { title: "J. Junaid Jamshed", cat: "Video",      size: "large",  bg: "#546b52", accent: "#546b52" },
+  { title: "Tapal 70 Years",    cat: "Campaign",   size: "normal", bg: "#ff6400", accent: "#ff6400" },
+  { title: "Tapal",             cat: "Social",     size: "normal", bg: "#3a4e39", accent: "#3a4e39" },
+  { title: "Sooper",            cat: "Branding",   size: "normal", bg: "#1a1a1a", accent: "#1a1a1a" },
+  { title: "5 Rupees Band",     cat: "Performance",size: "normal", bg: "#ff6400", accent: "#ff6400" },
+  { title: "Almirah",           cat: "Design",     size: "normal", bg: "#546b52", accent: "#546b52" },
+  { title: "Tapal Mezban",      cat: "Video",      size: "normal", bg: "#1a1a1a", accent: "#1a1a1a" },
+  { title: "EBM",               cat: "Content",    size: "normal", bg: "#ff6400", accent: "#ff6400" },
+  { title: "Yuc! Bites",        cat: "Social",     size: "normal", bg: "#546b52", accent: "#546b52" },
 ];
 
 const categories = ["All", "Branding", "Content", "Video", "Social", "Design", "Performance"];
@@ -54,7 +54,7 @@ export default function PortfolioPage() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.65 }}
-                className="font-black italic text-charcoal uppercase leading-[0.85] tracking-tight"
+                className="font-black text-charcoal uppercase leading-[0.85] tracking-tight"
                 style={{ fontSize: "clamp(3.5rem, 11vw, 9rem)" }}
               >
                 WHAT
@@ -70,7 +70,7 @@ export default function PortfolioPage() {
                 className="mt-5 text-charcoal/55 text-base max-w-xs leading-relaxed"
               >
                 From captivating brand experiences to results-driven digital
-                campaigns — every project is a story we&apos;re proud to tell.
+                campaigns. Every project is a story we&apos;re proud to tell.
               </motion.p>
             </div>
 
@@ -84,9 +84,9 @@ export default function PortfolioPage() {
               <div className="relative w-72 h-56 lg:w-96 lg:h-72">
                 {/* Stacked brand card stack */}
                 {[
-                  { label: "Pepsi", color: "#7A9E7E", rot: "-6deg", z: 0, tx: "0px",  ty: "0px"   },
-                  { label: "Knorr", color: "#E07A3B", rot: "3deg",  z: 1, tx: "20px", ty: "-10px" },
-                  { label: "Tapal", color: "#2C2C2C", rot: "10deg", z: 2, tx: "40px", ty: "-24px" },
+                  { label: "Pepsi", color: "#546b52", rot: "-6deg", z: 0, tx: "0px",  ty: "0px"   },
+                  { label: "Knorr", color: "#ff6400", rot: "3deg",  z: 1, tx: "20px", ty: "-10px" },
+                  { label: "Tapal", color: "#1a1a1a", rot: "10deg", z: 2, tx: "40px", ty: "-24px" },
                 ].map((card, i) => (
                   <motion.div
                     key={card.label}
@@ -155,7 +155,7 @@ export default function PortfolioPage() {
               className="font-black text-charcoal uppercase text-center"
               style={{ fontSize: "clamp(2rem, 5vw, 3.8rem)" }}
             >
-              OUR LATEST <span className="text-orange">PROJECTS</span>
+              RECENT <span className="text-orange">WORK</span>
             </h2>
             {/* Category pills — decorative */}
             <div className="flex flex-wrap justify-center gap-2">
@@ -237,7 +237,7 @@ export default function PortfolioPage() {
                 {/* Hover overlay */}
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center rounded-2xl"
                   style={{ backgroundColor: proj.accent + "E8" }}>
-                  <span className="text-white text-xs font-black tracking-wide">View Project →</span>
+                  <span className="text-white text-xs font-black tracking-wide">View Project</span>
                 </div>
               </motion.div>
             ))}
@@ -266,7 +266,7 @@ export default function PortfolioPage() {
             href="/contact"
             className="inline-flex items-center px-10 py-4 text-sm font-black text-sage bg-white rounded-full hover:bg-white/90 hover:shadow-2xl hover:-translate-y-1 transition-all uppercase tracking-wide"
           >
-            Start a Project →
+            Work with SQRD
           </Link>
         </div>
       </section>

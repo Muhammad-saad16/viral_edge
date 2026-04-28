@@ -14,16 +14,12 @@ export default function CustomCursor() {
   const mx = useMotionValue(-100);
   const my = useMotionValue(-100);
 
-  /* Large ring follows with spring lag */
-  const rx = useSpring(mx, { stiffness: 90, damping: 18, mass: 0.6 });
-  const ry = useSpring(my, { stiffness: 90, damping: 18, mass: 0.6 });
-
-  /* Small dot follows instantly */
+  const rx = useSpring(mx, { stiffness: 90,  damping: 18, mass: 0.6 });
+  const ry = useSpring(my, { stiffness: 90,  damping: 18, mass: 0.6 });
   const dx = useSpring(mx, { stiffness: 600, damping: 30 });
   const dy = useSpring(my, { stiffness: 600, damping: 30 });
 
   useEffect(() => {
-    /* Hide on touch devices */
     if (window.matchMedia("(hover: none)").matches) return;
 
     const move = (e: MouseEvent) => {
@@ -31,7 +27,6 @@ export default function CustomCursor() {
       my.set(e.clientY);
       if (!visible) setVisible(true);
     };
-
     const down = (e: MouseEvent) => {
       setClicked(true);
       const id = Date.now();
@@ -39,7 +34,6 @@ export default function CustomCursor() {
       setTimeout(() => setRipples((p) => p.filter((r) => r.id !== id)), 900);
       setTimeout(() => setClicked(false), 200);
     };
-
     const over = (e: MouseEvent) => {
       const t = e.target as HTMLElement;
       setHovered(!!t.closest("a, button, [role='button'], input, textarea, select"));
@@ -62,31 +56,33 @@ export default function CustomCursor() {
 
   return (
     <>
-      {/* Large ring */}
+      {/* Square outer ring */}
       <motion.div
-        className="fixed top-0 left-0 pointer-events-none z-[9999] rounded-full border-2"
+        className="fixed top-0 left-0 pointer-events-none z-[9999] border-2"
         style={{
           x: rx,
           y: ry,
           translateX: "-50%",
           translateY: "-50%",
-          borderColor: hovered ? "#E07A3B" : "#7A9E7E",
-          width: hovered ? 56 : 38,
-          height: hovered ? 56 : 38,
-          backgroundColor: hovered ? "#E07A3B18" : "transparent",
+          borderRadius: "4px",
+          borderColor: hovered ? "#ff6400" : "#546b52",
+          width:  hovered ? 52 : 36,
+          height: hovered ? 52 : 36,
+          backgroundColor: hovered ? "#ff640014" : "transparent",
         }}
         animate={{ scale: clicked ? 0.75 : 1 }}
         transition={{ duration: 0.12 }}
       />
 
-      {/* Small dot */}
+      {/* Square inner dot */}
       <motion.div
-        className="fixed top-0 left-0 pointer-events-none z-[9999] rounded-full bg-orange"
+        className="fixed top-0 left-0 pointer-events-none z-[9999] bg-orange"
         style={{
           x: dx,
           y: dy,
           translateX: "-50%",
           translateY: "-50%",
+          borderRadius: "2px",
           width: 7,
           height: 7,
         }}
@@ -94,15 +90,15 @@ export default function CustomCursor() {
         transition={{ duration: 0.12 }}
       />
 
-      {/* Click ripples */}
+      {/* Square click ripples */}
       {ripples.map((r) => (
         <motion.div
           key={r.id}
-          className="fixed top-0 left-0 pointer-events-none z-[9998] rounded-full border border-sage"
-          style={{ x: r.x, y: r.y, translateX: "-50%", translateY: "-50%" }}
+          className="fixed top-0 left-0 pointer-events-none z-[9998] border border-sage"
+          style={{ x: r.x, y: r.y, translateX: "-50%", translateY: "-50%", borderRadius: "6px" }}
           initial={{ width: 0, height: 0, opacity: 0.9 }}
-          animate={{ width: 100, height: 100, opacity: 0 }}
-          transition={{ duration: 0.75, ease: "easeOut" }}
+          animate={{ width: 90, height: 90, opacity: 0 }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
         />
       ))}
     </>

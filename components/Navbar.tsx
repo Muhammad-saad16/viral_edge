@@ -7,16 +7,16 @@ import { motion, AnimatePresence } from "framer-motion";
 import Logo from "./Logo";
 
 const navLinks = [
-  { href: "/", label: "Home" },
-  { href: "/meet-the-squad", label: "Meet The Squad" },
-  { href: "/portfolio", label: "Portfolio" },
-  { href: "/services", label: "Services" },
-  { href: "/post-for-rent", label: "Post For Rent" },
+  { href: "/",          label: "Home"     },
+  { href: "/portfolio", label: "Work"     },
+  { href: "/services",  label: "Services" },
+  { href: "/process",   label: "Process"  },
+  { href: "/contact",   label: "Contact"  },
 ];
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled,  setScrolled]  = useState(false);
+  const [menuOpen,  setMenuOpen]  = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -36,12 +36,11 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-5 lg:px-10">
         <div className="flex items-center justify-between h-16">
 
-          {/* Logo — SVG from brand mark */}
           <Link href="/" className="flex items-center">
             <Logo className="h-8 w-auto" />
           </Link>
 
-          {/* Desktop Nav */}
+          {/* Desktop nav */}
           <nav className="hidden md:flex items-center gap-7">
             {navLinks.map((link) => (
               <Link
@@ -63,7 +62,7 @@ export default function Navbar() {
               href="/contact"
               className="hidden md:inline-flex items-center px-5 py-2.5 text-sm font-bold text-white bg-orange rounded-full hover:bg-orange/90 transition-colors shadow-md shadow-orange/20"
             >
-              Contact Us
+              Get More Customers
             </Link>
 
             {/* Mobile hamburger */}
@@ -73,18 +72,9 @@ export default function Navbar() {
               aria-label="Toggle menu"
             >
               <div className="space-y-1.5">
-                <motion.span
-                  animate={menuOpen ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }}
-                  className="block w-6 h-0.5 bg-charcoal"
-                />
-                <motion.span
-                  animate={menuOpen ? { opacity: 0 } : { opacity: 1 }}
-                  className="block w-6 h-0.5 bg-charcoal"
-                />
-                <motion.span
-                  animate={menuOpen ? { rotate: -45, y: -8 } : { rotate: 0, y: 0 }}
-                  className="block w-6 h-0.5 bg-charcoal"
-                />
+                <motion.span animate={menuOpen ? { rotate: 45,  y: 8  } : { rotate: 0, y: 0 }} className="block w-6 h-0.5 bg-charcoal" />
+                <motion.span animate={menuOpen ? { opacity: 0 }           : { opacity: 1 }}    className="block w-6 h-0.5 bg-charcoal" />
+                <motion.span animate={menuOpen ? { rotate: -45, y: -8 } : { rotate: 0, y: 0 }} className="block w-6 h-0.5 bg-charcoal" />
               </div>
             </button>
           </div>
@@ -116,7 +106,7 @@ export default function Navbar() {
                 href="/contact"
                 className="mt-2 flex justify-center py-3 text-sm font-bold text-white bg-orange rounded-full"
               >
-                Contact Us
+                Get More Customers
               </Link>
             </div>
           </motion.div>

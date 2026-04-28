@@ -1,64 +1,43 @@
 @import "tailwindcss";
 
 @theme {
-  --color-beige: #F5F0E8;
-  --color-sage: #7A9E7E;
-  --color-sage-dark: #5C7E60;
-  --color-sage-light: #EEF3EF;
-  --color-orange: #E07A3B;
-  --color-charcoal: #2C2C2C;
-  --color-charcoal-soft: #4A4A4A;
-  --font-sans: var(--font-jakarta);
+  --color-beige: #faebd7;
+  --color-sage: #546b52;
+  --color-sage-dark: #3a4e39;
+  --color-sage-light: #eaf0ea;
+  --color-orange: #ff6400;
+  --color-charcoal: #1a1a1a;
+  --color-charcoal-soft: #3a3a3a;
+  --font-sans: var(--font-poppins);
 }
 
-html {
-  scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
 body {
-  background-color: #F5F0E8;
-  color: #2C2C2C;
+  background-color: #faebd7;
+  color: #1a1a1a;
 }
 
-::-webkit-scrollbar {
-  width: 5px;
-}
-::-webkit-scrollbar-track {
-  background: #F5F0E8;
-}
-::-webkit-scrollbar-thumb {
-  background: #7A9E7E;
-  border-radius: 10px;
-}
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: #faebd7; }
+::-webkit-scrollbar-thumb { background: #546b52; border-radius: 2px; }
 
-::selection {
-  background: #7A9E7E;
-  color: #fff;
-}
+::selection { background: #546b52; color: #fff; }
 
 @keyframes marquee {
   from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+  to   { transform: translateX(-50%); }
 }
-
-.animate-marquee {
-  animation: marquee 20s linear infinite;
-}
+.animate-marquee { animation: marquee 28s linear infinite; }
 
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-12px); }
+  50%       { transform: translateY(-12px); }
 }
-
-.animate-float {
-  animation: float 4s ease-in-out infinite;
-}
+.animate-float { animation: float 4s ease-in-out infinite; }
 
 @keyframes pulse-ring {
-  0% { transform: scale(0.8); opacity: 1; }
-  100% { transform: scale(2); opacity: 0; }
+  0%   { transform: scale(0.8); opacity: 1; }
+  100% { transform: scale(2);   opacity: 0; }
 }
-
-.animate-pulse-ring {
-  animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
-}
+.animate-pulse-ring { animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite; }

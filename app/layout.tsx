@@ -1,30 +1,28 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans } from "next/font/google";
+import { Poppins } from "next/font/google";
 import "./globals.css";
 import ClientProviders from "@/components/ClientProviders";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
-const jakarta = Plus_Jakarta_Sans({
-  variable: "--font-jakarta",
+const poppins = Poppins({
+  variable: "--font-poppins",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800"],
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "ViralEdge — Digital Agency",
+  title: "SQRD Digital — Agency",
   description:
-    "We craft digital experiences that convert. Strategy, content, design, and growth — all under one roof.",
+    "Strategy, content, design and growth for brands that want presence, not just visibility.",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={jakarta.variable}>
+    <html lang="en" className={poppins.variable}>
       <body className="min-h-screen bg-beige text-charcoal antialiased font-sans">
         <ClientProviders>
           <Navbar />
