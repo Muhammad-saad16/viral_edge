@@ -108,7 +108,7 @@ export default function HomePage() {
 
               <motion.h1 variants={item}
                 className="font-black text-charcoal uppercase leading-[0.9] tracking-tight mb-6"
-                style={{ fontSize: "clamp(3.5rem, 10vw, 9rem)" }}>
+                style={{ fontSize: "clamp(2rem, 10vw, 9rem)" }}>
                 WE SQUARE<br />
                 <span className="relative inline-block">
                   CHAOS INTO<br />CLARITY
@@ -150,7 +150,7 @@ export default function HomePage() {
 
             {/* ── Right visual ── */}
             <motion.div variants={item} className="flex-1 flex justify-center items-center">
-              <div className="relative w-72 h-72 lg:w-[400px] lg:h-[400px]">
+              <div className="relative w-60 h-60 sm:w-72 sm:h-72 lg:w-[400px] lg:h-[400px]">
                 {[0, 1, 2].map((i) => (
                   <motion.div key={i} className="absolute rounded-2xl border"
                     style={{
@@ -251,7 +251,7 @@ export default function HomePage() {
               </motion.p>
               <motion.h2 initial={{ opacity: 0, x: -40 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}
                 className="font-black text-white uppercase leading-[0.9] mb-6"
-                style={{ fontSize: "clamp(2.8rem, 7vw, 6rem)" }}>
+                style={{ fontSize: "clamp(1.6rem, 7vw, 6rem)" }}>
                 END-TO-END,<br />DONE PROPERLY.
               </motion.h2>
               <motion.p initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.15 }}
@@ -289,7 +289,7 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-5 lg:px-10">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-14">
             <p className="text-xs font-bold tracking-[0.2em] uppercase text-sage mb-3">Our Process</p>
-            <h2 className="font-black text-charcoal uppercase" style={{ fontSize: "clamp(2.5rem, 6vw, 5rem)" }}>
+            <h2 className="font-black text-charcoal uppercase" style={{ fontSize: "clamp(1.6rem, 6vw, 5rem)" }}>
               HOW WE <span className="text-sage">WORK</span>
             </h2>
           </motion.div>
@@ -334,7 +334,7 @@ export default function HomePage() {
           <div className="flex flex-col lg:flex-row items-center gap-16">
 
             <motion.div initial={{ opacity: 0, x: -24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.65 }}
-              className="flex-1 grid grid-cols-3 gap-3">
+              className="flex-1 grid grid-cols-2 sm:grid-cols-3 gap-3">
               {team.map((m, i) => (
                 <motion.div key={m.name}
                   initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.07 }}
@@ -358,7 +358,7 @@ export default function HomePage() {
               </motion.p>
               <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.08 }}
                 className="font-black text-white uppercase leading-[0.9] mb-5"
-                style={{ fontSize: "clamp(2.8rem, 7vw, 5.5rem)" }}>
+                style={{ fontSize: "clamp(1.6rem, 7vw, 5.5rem)" }}>
                 THE SQRD<br />
                 <span style={{ WebkitTextStroke: "2px rgba(255,255,255,0.7)", color: "transparent" }}>SQUAD</span>
               </motion.h2>
@@ -383,7 +383,7 @@ export default function HomePage() {
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12">
             <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
               className="font-black text-white uppercase leading-[0.9]"
-              style={{ fontSize: "clamp(2.5rem, 7vw, 5.5rem)" }}>
+              style={{ fontSize: "clamp(1.6rem, 7vw, 5.5rem)" }}>
               FEATURED<br />
               <span className="text-orange">PROJECTS</span>
             </motion.h2>
@@ -429,7 +429,7 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-5 lg:px-10">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-14">
             <p className="text-xs font-bold tracking-[0.2em] uppercase text-sage mb-3">What Clients Say</p>
-            <h2 className="font-black text-charcoal uppercase" style={{ fontSize: "clamp(2.5rem, 6vw, 5rem)" }}>
+            <h2 className="font-black text-charcoal uppercase" style={{ fontSize: "clamp(1.6rem, 6vw, 5rem)" }}>
               CLIENT <span className="text-orange">STORIES</span>
             </h2>
           </motion.div>
@@ -475,7 +475,7 @@ export default function HomePage() {
 
             <div className="relative">
               <h2 className="font-black text-white uppercase leading-[0.9] mb-5"
-                style={{ fontSize: "clamp(2.5rem, 7vw, 5.5rem)" }}>
+                style={{ fontSize: "clamp(1.6rem, 7vw, 5.5rem)" }}>
                 DONE PLAYING<br />
                 <span className="text-orange">SMALL?</span>
               </h2>

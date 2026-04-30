@@ -155,7 +155,7 @@ export default function MeetTheSquadPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.65 }}
                 className="font-black text-charcoal uppercase leading-none tracking-tight"
-                style={{ fontSize: "clamp(3rem, 11vw, 8.5rem)" }}
+                style={{ fontSize: "clamp(2rem, 11vw, 8.5rem)" }}
               >
                 THE SQRD
                 <br />

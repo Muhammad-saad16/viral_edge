@@ -41,3 +41,8 @@ body {
   100% { transform: scale(2);   opacity: 0; }
 }
 .animate-pulse-ring { animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite; }
+
+/* Portfolio masonry grid rows — only on md+ */
+@media (min-width: 768px) {
+  .portfolio-masonry { grid-auto-rows: 130px; }
+}

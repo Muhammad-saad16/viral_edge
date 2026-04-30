@@ -101,7 +101,7 @@ export default function PostForRentPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7 }}
                 className="font-black italic text-white uppercase leading-[0.9] tracking-tight"
-                style={{ fontSize: "clamp(2.4rem, 7vw, 5.8rem)" }}
+                style={{ fontSize: "clamp(1.8rem, 7vw, 5.8rem)" }}
               >
                 RESHAPING
                 <br />
@@ -346,7 +346,7 @@ export default function PostForRentPage() {
             <br />
             <span className="text-sage">BRANDS IN THE WORLD</span>
           </motion.h2>
-          <div className="grid grid-cols-5 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
             {brands.map((b, i) => (
               <motion.div
                 key={b.name}

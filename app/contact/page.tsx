@@ -38,7 +38,7 @@ export default function ContactPage() {
           <p className="text-xs font-black tracking-[0.25em] uppercase text-sage mb-3">Say Hello</p>
           <h1
             className="font-black text-charcoal uppercase leading-[0.88] tracking-tight mb-4"
-            style={{ fontSize: "clamp(3rem, 9vw, 7rem)" }}
+            style={{ fontSize: "clamp(1.8rem, 9vw, 7rem)" }}
           >
             TELL US<br />
             ABOUT YOUR<br />

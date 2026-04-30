@@ -43,7 +43,7 @@ export default function ServicesPage() {
               </motion.p>
               <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.65 }}
                 className="font-black text-charcoal uppercase leading-[0.85] tracking-tight"
-                style={{ fontSize: "clamp(3.5rem, 10vw, 8.5rem)" }}>
+                style={{ fontSize: "clamp(2rem, 10vw, 8.5rem)" }}>
                 OUR<br />
                 <span className="relative inline-block" style={{ WebkitTextStroke: "3px #ff6400", color: "transparent" }}>SERVICES</span>
               </motion.h1>

@@ -55,7 +55,7 @@ export default function PortfolioPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.65 }}
                 className="font-black text-charcoal uppercase leading-[0.85] tracking-tight"
-                style={{ fontSize: "clamp(3.5rem, 11vw, 9rem)" }}
+                style={{ fontSize: "clamp(2rem, 11vw, 9rem)" }}
               >
                 WHAT
                 <br />
@@ -179,13 +179,7 @@ export default function PortfolioPage() {
       {/* ══════════════ MASONRY GRID ══════════════ */}
       <section className="bg-beige pb-20 pt-8">
         <div className="max-w-7xl mx-auto px-5 lg:px-10">
-          <div
-            className="grid gap-3"
-            style={{
-              gridTemplateColumns: "repeat(4, 1fr)",
-              gridAutoRows: "130px",
-            }}
-          >
+          <div className="grid gap-3 grid-cols-2 md:grid-cols-4 portfolio-masonry">
             {projects.map((proj, i) => (
               <motion.div
                 key={proj.title + i}
@@ -194,20 +188,11 @@ export default function PortfolioPage() {
                 viewport={{ once: true, margin: "-20px" }}
                 transition={{ delay: (i % 4) * 0.06, duration: 0.4 }}
                 whileHover={{ scale: 1.04 }}
-                className="group relative rounded-2xl flex flex-col items-center justify-center overflow-hidden cursor-default"
-                style={
-                  proj.size === "large"
-                    ? {
-                        gridColumn: "span 2",
-                        gridRow: "span 2",
-                        backgroundColor: proj.bg + "28",
-                        border: `1.5px solid ${proj.accent}30`,
-                      }
-                    : {
-                        backgroundColor: proj.bg + "1A",
-                        border: `1.5px solid ${proj.accent}25`,
-                      }
-                }
+                className={`group relative rounded-2xl flex flex-col items-center justify-center overflow-hidden cursor-default min-h-[130px]${proj.size === "large" ? " md:col-span-2 md:row-span-2" : ""}`}
+                style={{
+                  backgroundColor: proj.size === "large" ? proj.bg + "28" : proj.bg + "1A",
+                  border: `1.5px solid ${proj.accent}${proj.size === "large" ? "30" : "25"}`,
+                }}
               >
                 {/* Decorative corner accent */}
                 <div

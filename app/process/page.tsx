@@ -48,7 +48,7 @@ export default function ProcessPage() {
             className="max-w-3xl">
             <p className="text-xs font-black tracking-[0.25em] uppercase text-sage mb-4">How We Work</p>
             <h1 className="font-black text-charcoal uppercase leading-[0.88] tracking-tight mb-6"
-              style={{ fontSize: "clamp(3.5rem, 10vw, 8rem)" }}>
+              style={{ fontSize: "clamp(2rem, 10vw, 8rem)" }}>
               THE SQRD<br />
               <span style={{ WebkitTextStroke: "3px #546b52", color: "transparent" }}>PROCESS</span>
             </h1>
