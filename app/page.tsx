@@ -3,17 +3,17 @@
 import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef, useState } from "react";
+import { useGeoRegion } from "@/hooks/useGeoRegion";
 
 const container = { hidden: {}, show: { transition: { staggerChildren: 0.1 } } };
 const item = { hidden: { opacity: 0, y: 40 }, show: { opacity: 1, y: 0, transition: { duration: 0.65 } } };
 
-/* ── Clean SVG icons — stroke style ── */
-const StoryIcon    = () => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>;
-const VideoIcon    = () => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><rect x="2" y="2" width="20" height="20" rx="3"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor" stroke="none"/></svg>;
-const DesignIcon   = () => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>;
-const ChartIcon    = () => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>;
-const CameraIcon   = () => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>;
-const WebIcon      = () => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>;
+const StoryIcon  = () => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>;
+const VideoIcon  = () => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><rect x="2" y="2" width="20" height="20" rx="3"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor" stroke="none"/></svg>;
+const DesignIcon = () => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>;
+const ChartIcon  = () => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>;
+const CameraIcon = () => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>;
+const WebIcon    = () => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>;
 
 function LogoImage({ src, alt, accent }: { src: string; alt: string; accent: string }) {
   const [broken, setBroken] = useState(false);
@@ -25,9 +25,7 @@ function LogoImage({ src, alt, accent }: { src: string; alt: string; accent: str
       </div>
     );
   }
-  return (
-    <img src={src} alt={alt} className="w-20 h-12 object-contain" onError={() => setBroken(true)} />
-  );
+  return <img src={src} alt={alt} className="w-20 h-12 object-contain" onError={() => setBroken(true)} />;
 }
 
 const services = [
@@ -59,22 +57,43 @@ const team = [
 
 const clients = ["Pepsi", "Sunsilk", "Knorr", "Tapal", "Sooper", "Durex", "Mortein", "Layers", "EBM", "Almirah"];
 
-const testimonials = [
+const uaeTestimonials = [
   {
-    quote: "SQRD transformed how we approach digital storytelling. Our engagement went up 3x in just two months. Real results, no fluff.",
-    author: "Bilal R.", role: "Brand Manager, Pepsi Pakistan", color: "#546b52",
+    quote: "We came to SQRD with no social presence at all. Within five months they had built us a social following, a brand identity that felt premium, and a steady flow of real enquiries from Dubai and Abu Dhabi. The speed and quality of what they delivered is something I still find difficult to explain to people.",
+    author: "Director", role: "Aesthetic Clinic, Abu Dhabi", color: "#546b52",
   },
   {
-    quote: "From strategy to execution, SQRD delivered above expectations. They genuinely understand brand and performance at the same time.",
-    author: "Sana M.", role: "Head of Digital, Knorr Pakistan", color: "#ff6400",
+    quote: "Running a cafe in Abu Dhabi means you’re competing with chains that have entire marketing departments. SQRD levelled that playing field completely. Our Reels started pulling in people who had never heard of us. The first time someone walked in and said they found us on Instagram, I knew something had genuinely changed.",
+    author: "Owner", role: "Specialty Cafe, Abu Dhabi", color: "#ff6400",
   },
   {
-    quote: "Finally an agency that understands premium brand positioning. Sharp team, fast turnarounds, and results that speak.",
-    author: "Khalid A.", role: "CMO, Regional FMCG Group, UAE", color: "#3a4e39",
+    quote: "The UAE is a hard market to enter without local credibility. SQRD understood that challenge without us having to explain it. They built our brand presence with the UAE buyer in mind from day one, and the enquiries we started receiving within a few months were exactly the kind of clients we were hoping to attract.",
+    author: "Founder", role: "Beyjeem, UAE", color: "#3a4e39",
+  },
+];
+
+const pakTestimonials = [
+  {
+    quote: "SQRD Digital truly understood our brand’s soul. Their designs captured the magic of Hunza in every post; breathtaking, emotional, and scroll-stopping. Our engagement doubled within the first month of working with them.",
+    author: "Manager", role: "The Consorts Hotels & Resorts", color: "#546b52",
+  },
+  {
+    quote: "We needed designs that felt as luxurious as our fragrances. SQRD delivered exactly that. Every post they created felt editorial, elegant, and on-brand without us having to explain twice. They just get it.",
+    author: "Founder", role: "Virconia Perfumes", color: "#ff6400",
+  },
+  {
+    quote: "From our Festive Collection launch to everyday content, SQRD kept our aesthetic sharp and consistent. The team is fast, creative, and genuinely invested in making your brand look its best. Highly recommended.",
+    author: "Creative Director", role: "Bushirts", color: "#3a4e39",
+  },
+  {
+    quote: "We struggled to make exam prep content look appealing. SQRD changed that completely. Their designs are clean, professional, and actually converts. Our DMs haven’t stopped since we launched the new creatives.",
+    author: "Lead", role: "Proctor Exam Taker", color: "#546b52",
   },
 ];
 
 export default function HomePage() {
+  const region = useGeoRegion();
+  const testimonials = region === "PAK" ? pakTestimonials : uaeTestimonials;
   const heroRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
   const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
@@ -99,16 +118,9 @@ export default function HomePage() {
 
             {/* ── Left ── */}
             <div className="flex-1 max-w-2xl">
-              {/* <motion.div variants={item}>
-                <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sage/12 text-sage text-xs font-bold tracking-widest uppercase mb-8">
-                  <span className="w-1.5 h-1.5 rounded-sm bg-sage animate-pulse" />
-                  Digital Agency · Pakistan & UAE
-                </span>
-              </motion.div> */}
-
               <motion.h1 variants={item}
                 className="font-black text-charcoal uppercase leading-[0.9] tracking-tight mb-6"
-                style={{ fontSize: "clamp(2rem, 10vw, 9rem)" }}>
+                style={{ fontSize: "clamp(2rem, 8vw, 7rem)" }}>
                 WE SQUARE<br />
                 <span className="relative inline-block">
                   CHAOS INTO<br />CLARITY
@@ -124,7 +136,6 @@ export default function HomePage() {
                 We shape strategy, content, design &amp; growth crafted for brands that want presence, not just visibility.
               </motion.p>
 
-              {/* Service tags */}
               <motion.div variants={item} className="flex flex-wrap gap-2 mb-8">
                 {services.slice(0, 5).map((svc) => (
                   <span key={svc.title}
@@ -135,7 +146,6 @@ export default function HomePage() {
                 ))}
               </motion.div>
 
-              {/* CTAs */}
               <motion.div variants={item} className="flex flex-wrap gap-3">
                 <Link href="/portfolio"
                   className="px-7 py-3.5 rounded-full text-sm font-bold text-white bg-orange hover:bg-orange/90 hover:shadow-lg hover:shadow-orange/25 hover:-translate-y-0.5 transition-all uppercase tracking-wider">
@@ -169,7 +179,6 @@ export default function HomePage() {
                     transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
                     className="w-36 h-36 bg-charcoal rounded-2xl flex flex-col items-center justify-center gap-2 shadow-2xl"
                   >
-                    {/* Q mark */}
                     <div className="relative" style={{ width: 40, height: 46 }}>
                       <div className="bg-[#ff6400]" style={{ width: 32, height: 32, borderRadius: 2 }} />
                       <div className="absolute bg-[#1a1a1a]" style={{ width: 14, height: 14, top: 5, left: 9, borderRadius: 1 }} />
@@ -186,7 +195,7 @@ export default function HomePage() {
                   { label: "5+ Years",      top: "8%",  left: "2%",  bg: "#3a4e39", delay: 1.5 },
                 ].map((chip) => (
                   <motion.div key={chip.label}
-                    className="absolute px-3 py-1 rounded-full text-xs font-bold text-white whitespace-nowrap shadow-md"
+                    className="absolute px-2.5 py-0.5 rounded-full text-[10px] font-semibold text-white whitespace-nowrap shadow-md"
                     style={{ top: chip.top, left: chip.left, backgroundColor: chip.bg }}
                     animate={{ y: [0, -6, 0] }}
                     transition={{ duration: 2.8, repeat: Infinity, delay: chip.delay }}>
@@ -211,25 +220,13 @@ export default function HomePage() {
       {/* ════════════════ TRUSTED BRANDS ════════════════ */}
       <div className="bg-sage-light border-y border-sage/15 py-5 overflow-hidden">
         <p className="text-center text-[10px] font-bold tracking-[0.3em] uppercase text-charcoal/35 mb-4">
-          Trusted by 150+ Brands across Pakistan & UAE
+          Trusted by 150+ Brands across Pakistan &amp; UAE
         </p>
         <div className="flex animate-marquee whitespace-nowrap">
           {[...clients, ...clients, ...clients].map((c, i) => (
             <span key={i} className="inline-flex items-center gap-6 px-8 text-sm font-bold text-charcoal/25 uppercase tracking-widest">
               {c}
               <span className="inline-block w-1 h-1 rounded-sm bg-sage/40" />
-            </span>
-          ))}
-        </div>
-      </div>
-
-      {/* ════════════════ DARK MARQUEE ════════════════ */}
-      <div className="bg-charcoal py-3.5 overflow-hidden select-none">
-        <div className="flex animate-marquee whitespace-nowrap">
-          {[...Array(22)].map((_, i) => (
-            <span key={i} className="inline-flex items-center gap-5 px-6 text-[11px] font-bold text-white/35 uppercase tracking-widest">
-              {["Storytelling", "Video", "Branding", "Websites", "Performance", "Digital PR"][i % 6]}
-              <span className="inline-block w-1 h-1 bg-sage" />
             </span>
           ))}
         </div>
@@ -309,7 +306,7 @@ export default function HomePage() {
                     style={{ left: "calc(50% + 30px)", width: "calc(100% - 30px)" }} />
                 )}
                 <div className="bg-white rounded-2xl border border-charcoal/6 hover:border-sage/25 hover:shadow-lg transition-all p-6 text-center z-10 relative">
-                  <div className="w-14 h-14 rounded-xl bg-sage/10 flex items-center justify-center font-black text-sage text-lg mx-auto mb-4">
+                  <div className="w-10 h-10 rounded-xl bg-sage/10 flex items-center justify-center font-black text-sage text-sm mx-auto mb-4">
                     {s.step}
                   </div>
                   <h3 className="text-sm font-black text-charcoal uppercase tracking-wide mb-2">{s.label}</h3>
@@ -402,12 +399,9 @@ export default function HomePage() {
                 className="group aspect-square rounded-2xl relative overflow-hidden cursor-default flex flex-col justify-between p-5"
                 style={{ backgroundColor: w.bg, border: `1.5px solid ${w.border}28` }}>
                 <div className="h-0.5 w-10 rounded-full" style={{ backgroundColor: w.border }} />
-
-                {/* Logo */}
                 <div className="flex items-center justify-center flex-1 py-2">
                   <LogoImage src={w.logo} alt={w.title} accent={w.border} />
                 </div>
-
                 <div>
                   <p className="text-sm font-black text-charcoal leading-tight mb-2">{w.title}</p>
                   <span className="inline-block px-2.5 py-0.5 rounded-md text-[10px] font-bold text-white"
@@ -434,7 +428,7 @@ export default function HomePage() {
             </h2>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className={`grid grid-cols-1 gap-6 ${testimonials.length === 4 ? "md:grid-cols-2" : "md:grid-cols-3"}`}>
             {testimonials.map((t, i) => (
               <motion.div key={i}
                 initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}
@@ -450,7 +444,7 @@ export default function HomePage() {
                 <div className="flex items-center gap-3">
                   <div className="w-9 h-9 rounded-xl flex items-center justify-center text-xs font-black text-white flex-shrink-0"
                     style={{ backgroundColor: t.color }}>
-                    {t.author.split(" ").map((n) => n[0]).join("").slice(0, 2)}
+                    {t.author.split(" ").map((n: string) => n[0]).join("").slice(0, 2).toUpperCase()}
                   </div>
                   <div>
                     <p className="text-xs font-black text-charcoal">{t.author}</p>
