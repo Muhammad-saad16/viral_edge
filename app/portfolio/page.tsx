@@ -1,50 +1,192 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import Link from "next/link";
+import { useRef, useState } from "react";
 import { useGeoRegion } from "@/hooks/useGeoRegion";
 
-const clients = [
+const pakPortfolioClients = [
   "Jeeviez Kitchen", "Pepsi", "Mortein", "Knorr",
   "Tapal", "Sunsilk", "Sooper", "Durex", "Layers",
   "Almirah", "EBM", "J. Junaid Jamshed",
 ];
+const uaePortfolioClients = [
+  "Aqua Pure Water Technologies", "Beyjeem Photography", "Aesthetic Clinic", "Specialty Cafe",
+];
 
+// Set logo to a path string when the image file exists, or null to show gradient+initial fallback
 const uaeCaseStudies = [
   {
     title: "Aqua Pure Water Technologies",
     subtitle: "Brand identity & digital presence built for the UAE B2B market.",
     route: "/portfolio/aqua-pure",
     color: "#546b52",
+    gradFrom: "#546b52",
+    gradTo: "#3a4e39",
+    initial: "AP",
     tags: ["Brand Identity", "Digital"],
+    stat: "3×",
+    statLabel: "ROI in 90 days",
+    logo: null as string | null,   // e.g. "/logos/aqua.png" when file exists
   },
   {
-    title: "Beyjeem",
+    title: "Beyjeem Photography",
     subtitle: "Market entry strategy that earned UAE buyer credibility from day one.",
     route: "/portfolio/beyjeem",
     color: "#ff6400",
+    gradFrom: "#ff6400",
+    gradTo: "#9c3d00",
+    initial: "BJ",
     tags: ["Social Media", "Strategy"],
+    stat: "10K+",
+    statLabel: "Followers gained",
+    logo: null as string | null,   // e.g. "/logos/beyjeem.png"
   },
   {
     title: "Aesthetic Clinic",
     subtitle: "Premium social presence generating real Abu Dhabi enquiries within 5 months.",
     route: "/portfolio/aesthetic-clinic",
-    color: "#3a4e39",
+    color: "#c9a96e",
+    gradFrom: "#2a2218",
+    gradTo: "#1a1510",
+    initial: "AC",
     tags: ["Branding", "Social"],
+    stat: "5×",
+    statLabel: "Enquiries monthly",
+    logo: null as string | null,   // e.g. "/logos/aesthetic-clinic.png"
   },
   {
     title: "Specialty Cafe",
     subtitle: "Reels-led growth that turned Instagram followers into walk-in customers.",
     route: "/portfolio/specialty-cafe",
     color: "#546b52",
+    gradFrom: "#1a1a1a",
+    gradTo: "#2d2d2d",
+    initial: "SC",
     tags: ["Content", "Reels"],
+    stat: "200%",
+    statLabel: "Footfall increase",
+    logo: null as string | null,   // e.g. "/logos/specialty-cafe.png"
   },
 ];
 
-const pakPortfolio = { route: "/portfolio/pakistan" };
+const pakCaseStudies = [
+  {
+    title: "The Consorts Hotels & Resorts",
+    subtitle: "Luxury hospitality brand built for discerning Pakistani travellers seeking premium experiences.",
+    route: "/portfolio/consorts-hotels",
+    color: "#c9a96e",
+    gradFrom: "#2a1a0a",
+    gradTo: "#14100a",
+    initial: "CH",
+    tags: ["Hospitality", "Branding"],
+    stat: "5★",
+    statLabel: "Brand Positioning",
+  },
+  {
+    title: "Virconia Perfumes",
+    subtitle: "Fragrance identity and luxury social presence crafted to reach high-intent Pakistani buyers.",
+    route: "/portfolio/virconia-perfumes",
+    color: "#9b59b6",
+    gradFrom: "#1e0a2a",
+    gradTo: "#110616",
+    initial: "VP",
+    tags: ["Luxury", "Social Media"],
+    stat: "40K+",
+    statLabel: "Monthly Reach",
+  },
+  {
+    title: "Bushirts by Mir Dilawer",
+    subtitle: "Fashion-forward campaigns that tripled online sales for this emerging Pakistani clothing label.",
+    route: "/portfolio/bushirts",
+    color: "#e74c3c",
+    gradFrom: "#2a0a0a",
+    gradTo: "#160606",
+    initial: "BM",
+    tags: ["Fashion", "Content"],
+    stat: "3×",
+    statLabel: "Sales Growth",
+  },
+  {
+    title: "Proctor Exam Taker",
+    subtitle: "EdTech digital marketing driving student enrolments for Pakistan's leading exam platform.",
+    route: "/portfolio/proctor-exam",
+    color: "#3498db",
+    gradFrom: "#0a1a2a",
+    gradTo: "#060e18",
+    initial: "PE",
+    tags: ["EdTech", "Digital"],
+    stat: "10K+",
+    statLabel: "Students Served",
+  },
+  {
+    title: "Travel Wala",
+    subtitle: "Campaign-led growth strategy putting Pakistan's top travel aggregator on every traveller's radar.",
+    route: "/portfolio/travel-wala",
+    color: "#ff6400",
+    gradFrom: "#2a1000",
+    gradTo: "#180800",
+    initial: "TW",
+    tags: ["Travel", "Campaigns"],
+    stat: "200+",
+    statLabel: "Destinations",
+  },
+  {
+    title: "Power-EX Lubricants",
+    subtitle: "B2B brand authority and digital pipeline built for Pakistan's high-performance lubricants market.",
+    route: "/portfolio/power-ex",
+    color: "#546b52",
+    gradFrom: "#0a1a0a",
+    gradTo: "#061006",
+    initial: "PX",
+    tags: ["Industrial", "B2B"],
+    stat: "50+",
+    statLabel: "Business Partners",
+  },
+];
+
+// ── CaseStudyLogoImage: shows logo if src exists, else null (caller handles fallback)
+function CaseStudyLogoImage({ src, alt }: { src: string; alt: string }) {
+  const [broken, setBroken] = useState(false);
+  if (broken) return null;
+  return (
+    <img
+      src={src}
+      alt={alt}
+      className="max-w-[60%] max-h-[55%] object-contain relative z-10"
+      onError={() => setBroken(true)}
+    />
+  );
+}
+
+function TiltCard({ children }: { children: React.ReactNode }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  const rotateX = useSpring(useTransform(y, [-0.5, 0.5], [6, -6]), { stiffness: 400, damping: 40 });
+  const rotateY = useSpring(useTransform(x, [-0.5, 0.5], [-6, 6]), { stiffness: 400, damping: 40 });
+
+  return (
+    <motion.div
+      ref={ref}
+      onMouseMove={(e) => {
+        const rect = ref.current?.getBoundingClientRect();
+        if (!rect) return;
+        x.set((e.clientX - rect.left) / rect.width - 0.5);
+        y.set((e.clientY - rect.top) / rect.height - 0.5);
+      }}
+      onMouseLeave={() => { x.set(0); y.set(0); }}
+      style={{ rotateX, rotateY, transformPerspective: 1000 }}
+      className="h-full"
+    >
+      {children}
+    </motion.div>
+  );
+}
 
 export default function PortfolioPage() {
   const region = useGeoRegion();
+  const portfolioClients = region === "PAK" ? pakPortfolioClients : uaePortfolioClients;
 
   return (
     <>
@@ -63,7 +205,7 @@ export default function PortfolioPage() {
               <motion.h1
                 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.65 }}
                 className="font-black text-charcoal uppercase leading-[0.85] tracking-tight"
-                style={{ fontSize: "clamp(2rem, 11vw, 9rem)" }}
+                style={{ fontSize: "clamp(1.6rem, 4vw, 3rem)" }}
               >
                 WHAT <span className="text-orange">WE</span>
                 <br />DO
@@ -75,6 +217,18 @@ export default function PortfolioPage() {
                 From captivating brand experiences to results-driven digital
                 campaigns. Every project is a story we&apos;re proud to tell.
               </motion.p>
+
+              <motion.div
+                initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.42 }}
+                className="mt-5 flex flex-wrap gap-2"
+              >
+                {portfolioClients.slice(0, 5).map((brand) => (
+                  <span key={brand}
+                    className="text-[9px] font-black uppercase tracking-widest px-2.5 py-1.5 rounded-lg bg-charcoal/6 text-charcoal/40 border border-charcoal/8">
+                    {brand.length > 14 ? brand.slice(0, 14) + "…" : brand}
+                  </span>
+                ))}
+              </motion.div>
             </div>
 
             <motion.div
@@ -83,9 +237,9 @@ export default function PortfolioPage() {
             >
               <div className="relative w-72 h-56 lg:w-96 lg:h-72">
                 {[
-                  { label: "Pepsi", color: "#546b52", rot: "-6deg", z: 0, tx: "0px",  ty: "0px"   },
-                  { label: "Knorr", color: "#ff6400", rot: "3deg",  z: 1, tx: "20px", ty: "-10px" },
-                  { label: "Tapal", color: "#1a1a1a", rot: "10deg", z: 2, tx: "40px", ty: "-24px" },
+                  { label: "Aqua pure water",  color: "#546b52", rot: "-6deg",  z: 0, tx: "0px",  ty: "0px"   },
+                  { label: "Beyjeem Photography",  color: "#ff6400", rot: "3deg",   z: 1, tx: "20px", ty: "-10px" },
+                  { label: "Specialty Cafe",  color: "#1a1a1a", rot: "10deg",  z: 2, tx: "40px", ty: "-24px" },
                 ].map((card, i) => (
                   <motion.div key={card.label}
                     initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }}
@@ -118,7 +272,7 @@ export default function PortfolioPage() {
           </p>
         </div>
         <div className="flex animate-marquee whitespace-nowrap">
-          {[...clients, ...clients, ...clients, ...clients].map((c, i) => (
+          {[...portfolioClients, ...portfolioClients, ...portfolioClients, ...portfolioClients, ...portfolioClients].map((c, i) => (
             <span key={i} className="inline-flex items-center gap-5 px-7 text-sm font-bold text-white/75 uppercase tracking-wide">
               {c}
               <span className="w-1.5 h-1.5 rounded-full bg-white/40 inline-block" />
@@ -129,82 +283,150 @@ export default function PortfolioPage() {
 
       {/* ══════════════ UAE CASE STUDIES ══════════════ */}
       {region === "UAE" && (
-        <section className="bg-beige py-20">
+        <section className="bg-charcoal py-24">
           <div className="max-w-7xl mx-auto px-5 lg:px-10">
 
-            {/* Section heading */}
             <motion.div
               initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-              className="flex items-end justify-between gap-6 mb-14 border-b border-charcoal/8 pb-8"
+              className="flex items-end justify-between gap-6 mb-16 border-b border-white/8 pb-8"
             >
               <div>
                 <p className="text-[10px] font-black tracking-[0.35em] uppercase text-sage mb-2">Selected Work</p>
-                <h2 className="font-black text-charcoal uppercase leading-none" style={{ fontSize: "clamp(2rem, 5vw, 4rem)" }}>
+                <h2 className="font-black text-white uppercase leading-none" style={{ fontSize: "clamp(1.8rem, 4vw, 3rem)" }}>
                   UAE CASE STUDIES
                 </h2>
               </div>
-              <span className="hidden sm:block text-[10px] font-black tracking-[0.3em] uppercase text-charcoal/20">
+              <span className="hidden sm:block text-[10px] font-black tracking-[0.3em] uppercase text-white/20">
                 04 Projects
               </span>
             </motion.div>
 
-            {/* Cards */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5" style={{ perspective: "1400px" }}>
               {uaeCaseStudies.map((cs, i) => (
                 <motion.div key={cs.title}
-                  initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.09 }}>
-                  <Link href={cs.route}
-                    className="group relative flex flex-col bg-white overflow-hidden rounded-2xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
-                    style={{ border: `1.5px solid ${cs.color}18` }}
-                  >
-                    {/* Top accent */}
-                    <div className="h-[3px]" style={{ background: `linear-gradient(90deg, ${cs.color}, ${cs.color}44)` }} />
-
-                    {/* Ghost number */}
-                    <span
-                      className="absolute top-5 right-6 font-black leading-none select-none pointer-events-none tabular-nums"
-                      style={{ fontSize: 88, color: `${cs.color}07` }}
+                  initial={{ opacity: 0, y: 70, scale: 0.9 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                  viewport={{ once: true, margin: "-40px" }}
+                  transition={{ delay: i * 0.13, duration: 0.7, ease: [0.23, 1, 0.32, 1] }}
+                  className="h-full"
+                >
+                  <TiltCard>
+                    <Link href={cs.route}
+                      className="group relative flex flex-col h-full rounded-3xl overflow-hidden"
+                      style={{ background: "#161616", border: `1.5px solid ${cs.color}22` }}
                     >
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
+                      {/* ── Abstract art area ── */}
+                      <div className="relative h-52 overflow-hidden flex-shrink-0"
+                        style={{ background: `linear-gradient(135deg, ${cs.gradFrom}, ${cs.gradTo})` }}>
 
-                    <div className="px-8 pt-8 pb-6 flex-1 relative z-10">
-                      {/* Label */}
-                      <div className="flex items-center gap-3 mb-6">
-                        <div className="w-5 h-px" style={{ backgroundColor: cs.color }} />
-                        <span className="text-[9px] font-black tracking-[0.3em] uppercase text-charcoal/35">
-                          UAE Case Study
+                        {/* Dot grid */}
+                        <div className="absolute inset-0"
+                          style={{ backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.10) 1px, transparent 1px)", backgroundSize: "20px 20px" }} />
+
+                        {/* Ghost initial — centred art */}
+                        <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-black select-none pointer-events-none"
+                          style={{ fontSize: 150, color: "rgba(255,255,255,0.045)", lineHeight: 1 }}>
+                          {cs.initial}
                         </span>
+
+                        {/* Ring — top-right */}
+                        <div className="absolute rounded-full border-2 opacity-25"
+                          style={{ width: 110, height: 110, borderColor: cs.color, top: -28, right: -28 }} />
+                        {/* Ring — inner */}
+                        <div className="absolute rounded-full border opacity-15"
+                          style={{ width: 65, height: 65, borderColor: "rgba(255,255,255,0.6)", top: 10, right: 10 }} />
+
+                        {/* Soft orb glow — bottom-left */}
+                        <div className="absolute w-32 h-32 rounded-full blur-3xl opacity-35"
+                          style={{ background: cs.color, bottom: -16, left: -16 }} />
+
+                        {/* Diagonal accent line */}
+                        <div className="absolute opacity-[0.12]"
+                          style={{ width: 1, height: 170, background: "linear-gradient(to bottom, transparent, rgba(255,255,255,0.5), transparent)", top: 0, left: "58%", transform: "rotate(28deg)", transformOrigin: "top" }} />
+
+                        {/* Animated shimmer */}
+                        <motion.div
+                          className="absolute inset-y-0 w-36 pointer-events-none"
+                          style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.07), transparent)" }}
+                          animate={{ x: ["-144px", "calc(100% + 144px)"] }}
+                          transition={{ duration: 2.4, repeat: Infinity, repeatDelay: 2.5 + i * 0.35, ease: "easeInOut" }}
+                        />
+
+                        {/* Floating stat badge */}
+                        <motion.div
+                          className="absolute top-5 left-5 rounded-2xl px-4 py-2.5 z-10"
+                          style={{ background: "rgba(0,0,0,0.42)", border: "1px solid rgba(255,255,255,0.18)" }}
+                          animate={{ y: [0, -5, 0] }}
+                          transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: i * 0.5 }}
+                        >
+                          <p className="font-black text-white text-lg leading-none">{cs.stat}</p>
+                          <p className="text-[9px] text-white/60 font-semibold mt-0.5 whitespace-nowrap">{cs.statLabel}</p>
+                        </motion.div>
+
+                        {/* Number badge — top-right */}
+                        <div className="absolute top-5 right-5 w-9 h-9 rounded-xl flex items-center justify-center z-10"
+                          style={{ background: "rgba(0,0,0,0.35)", border: "1px solid rgba(255,255,255,0.14)" }}>
+                          <span className="text-[11px] font-black text-white/55">{String(i + 1).padStart(2, "0")}</span>
+                        </div>
+
+                        {/* Top accent bar */}
+                        <div className="absolute top-0 left-0 right-0 h-[3px] z-10"
+                          style={{ background: `linear-gradient(90deg, ${cs.color}, ${cs.color}44)` }} />
+
+                        {/* Bottom dark fade */}
+                        <div className="absolute bottom-0 left-0 right-0 h-16"
+                          style={{ background: "linear-gradient(to top, rgba(22,22,22,0.92), transparent)" }} />
+
+                        {/* Hover colour wash */}
+                        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                          style={{ background: `radial-gradient(ellipse at 65% 40%, ${cs.color}30, transparent 65%)` }} />
                       </div>
 
-                      {/* Title */}
-                      <h3
-                        className="font-black text-charcoal uppercase leading-[0.9] mb-4 group-hover:text-sage transition-colors duration-300"
-                        style={{ fontSize: "clamp(1.45rem, 2.6vw, 2rem)" }}
-                      >
-                        {cs.title}
-                      </h3>
+                      {/* ── Content area ── */}
+                      <div className="flex flex-col flex-1 p-6 gap-3">
+                        <div className="flex items-center gap-2.5">
+                          <div className="w-4 h-px" style={{ backgroundColor: cs.color }} />
+                          <span className="text-[9px] font-black tracking-[0.28em] uppercase text-white/30">
+                            UAE Case Study
+                          </span>
+                        </div>
 
-                      <p className="text-charcoal/45 text-sm leading-relaxed">{cs.subtitle}</p>
-                    </div>
+                        <h3
+                          className="font-black text-white uppercase leading-[0.92] transition-all duration-300 group-hover:opacity-80"
+                          style={{ fontSize: "clamp(1.1rem, 2vw, 1.5rem)" }}
+                        >
+                          {cs.title}
+                        </h3>
 
-                    {/* Bottom row */}
-                    <div className="px-8 py-4 flex items-center justify-between border-t"
-                      style={{ borderColor: `${cs.color}12` }}>
-                      <div className="flex gap-4 flex-wrap">
-                        {cs.tags.map((t) => (
-                          <span key={t} className="text-[9px] font-black tracking-widest uppercase text-charcoal/25">{t}</span>
-                        ))}
+                        <p className="text-white/38 text-sm leading-relaxed">{cs.subtitle}</p>
+
+                        <div className="flex items-center justify-between mt-auto pt-4 border-t border-white/[0.07]">
+                          <div className="flex gap-3 flex-wrap">
+                            {cs.tags.map((t) => (
+                              <span key={t} className="text-[9px] font-black tracking-widest uppercase"
+                                style={{ color: cs.color + "aa" }}>
+                                {t}
+                              </span>
+                            ))}
+                          </div>
+                          <span className="inline-flex items-center gap-1.5 text-[10px] font-black uppercase tracking-wider group-hover:gap-2.5 transition-all duration-300"
+                            style={{ color: cs.color }}>
+                            View
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"
+                              className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-300">
+                              <path d="M5 12h14M12 5l7 7-7 7" />
+                            </svg>
+                          </span>
+                        </div>
                       </div>
-                      <span className="inline-flex items-center gap-1.5 text-[10px] font-black uppercase tracking-wider transition-all duration-300"
-                        style={{ color: cs.color }}>
-                        View
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform">
-                          <path d="M5 12h14M12 5l7 7-7 7"/>
-                        </svg>
-                      </span>
-                    </div>
-                  </Link>
+
+                      {/* Card edge glow on hover */}
+                      <div
+                        className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                        style={{ boxShadow: `inset 0 0 0 1.5px ${cs.color}55` }}
+                      />
+                    </Link>
+                  </TiltCard>
                 </motion.div>
               ))}
             </div>
@@ -214,70 +436,153 @@ export default function PortfolioPage() {
 
       {/* ══════════════ PAKISTAN PORTFOLIO ══════════════ */}
       {region === "PAK" && (
-        <section className="bg-beige py-20">
+        <section className="bg-charcoal py-24">
           <div className="max-w-7xl mx-auto px-5 lg:px-10">
 
-            {/* Section heading */}
             <motion.div
               initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-              className="flex items-end justify-between gap-6 mb-14 border-b border-charcoal/8 pb-8"
+              className="flex items-end justify-between gap-6 mb-16 border-b border-white/8 pb-8"
             >
               <div>
-                <p className="text-[10px] font-black tracking-[0.35em] uppercase text-sage mb-2">Our Work</p>
-                <h2 className="font-black text-charcoal uppercase leading-none" style={{ fontSize: "clamp(2rem, 5vw, 4rem)" }}>
-                  PAKISTAN PORTFOLIO
+                <p className="text-[10px] font-black tracking-[0.35em] uppercase text-sage mb-2">Selected Work</p>
+                <h2 className="font-black text-white uppercase leading-none" style={{ fontSize: "clamp(1.8rem, 4vw, 3rem)" }}>
+                  PAKISTAN CASE STUDIES
                 </h2>
               </div>
+              <span className="hidden sm:block text-[10px] font-black tracking-[0.3em] uppercase text-white/20">
+                06 Projects
+              </span>
             </motion.div>
 
-            {/* Card */}
-            <motion.div
-              initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-            >
-              <Link href={pakPortfolio.route}
-                className="group flex flex-col sm:flex-row bg-white rounded-2xl overflow-hidden hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
-                style={{ border: "1.5px solid #546b5220" }}
-              >
-                {/* Left sage stripe */}
-                <div className="w-full h-[3px] sm:h-auto sm:w-[4px] bg-sage flex-shrink-0" />
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5" style={{ perspective: "1400px" }}>
+              {pakCaseStudies.map((cs, i) => (
+                <motion.div key={cs.title}
+                  initial={{ opacity: 0, y: 70, scale: 0.9 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                  viewport={{ once: true, margin: "-40px" }}
+                  transition={{ delay: i * 0.13, duration: 0.7, ease: [0.23, 1, 0.32, 1] }}
+                  className="h-full"
+                >
+                  <TiltCard>
+                    <Link href={cs.route}
+                      className="group relative flex flex-col h-full rounded-3xl overflow-hidden"
+                      style={{ background: "#161616", border: `1.5px solid ${cs.color}22` }}
+                    >
+                      {/* ── Abstract art area ── */}
+                      <div className="relative h-52 overflow-hidden flex-shrink-0"
+                        style={{ background: `linear-gradient(135deg, ${cs.gradFrom}, ${cs.gradTo})` }}>
 
-                {/* Main content */}
-                <div className="px-10 py-10 flex-1">
-                  <div className="flex items-center gap-3 mb-6">
-                    <div className="w-5 h-px bg-sage" />
-                    <span className="text-[9px] font-black tracking-[0.3em] uppercase text-charcoal/35">Pakistan</span>
-                  </div>
-                  <h3 className="font-black text-charcoal uppercase leading-[0.9] mb-4 group-hover:text-sage transition-colors duration-300"
-                    style={{ fontSize: "clamp(1.6rem, 3vw, 2.4rem)" }}>
-                    Complete Pakistan Work
-                  </h3>
-                  <p className="text-charcoal/45 text-sm leading-relaxed mb-8 max-w-md">
-                    150+ brands — FMCG giants, premium lifestyle labels, hospitality, education. Our full Pakistan portfolio in one place.
-                  </p>
-                  <span className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-wider text-sage group-hover:gap-3 transition-all duration-300">
-                    View Full Portfolio
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="w-4 h-4 group-hover:translate-x-1 transition-transform">
-                      <path d="M5 12h14M12 5l7 7-7 7"/>
-                    </svg>
-                  </span>
-                </div>
+                        {/* Dot grid */}
+                        <div className="absolute inset-0"
+                          style={{ backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.10) 1px, transparent 1px)", backgroundSize: "20px 20px" }} />
 
-                {/* Stats sidebar */}
-                <div className="flex sm:flex-col justify-around sm:justify-center gap-8 px-10 py-8 border-t sm:border-t-0 sm:border-l"
-                  style={{ borderColor: "#546b5215" }}>
-                  {[
-                    { val: "150+", lbl: "Brands" },
-                    { val: "500+", lbl: "Projects" },
-                    { val: "5+",   lbl: "Years"   },
-                  ].map((s) => (
-                    <div key={s.lbl} className="text-center sm:text-left">
-                      <p className="font-black text-sage leading-none mb-1" style={{ fontSize: "clamp(1.6rem, 3vw, 2.2rem)" }}>{s.val}</p>
-                      <p className="text-[9px] font-black uppercase tracking-widest text-charcoal/25">{s.lbl}</p>
-                    </div>
-                  ))}
-                </div>
-              </Link>
-            </motion.div>
+                        {/* Ghost initial — centred art */}
+                        <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-black select-none pointer-events-none"
+                          style={{ fontSize: 150, color: "rgba(255,255,255,0.045)", lineHeight: 1 }}>
+                          {cs.initial}
+                        </span>
+
+                        {/* Ring — top-right */}
+                        <div className="absolute rounded-full border-2 opacity-25"
+                          style={{ width: 110, height: 110, borderColor: cs.color, top: -28, right: -28 }} />
+                        {/* Ring — inner */}
+                        <div className="absolute rounded-full border opacity-15"
+                          style={{ width: 65, height: 65, borderColor: "rgba(255,255,255,0.6)", top: 10, right: 10 }} />
+
+                        {/* Soft orb glow — bottom-left */}
+                        <div className="absolute w-32 h-32 rounded-full blur-3xl opacity-35"
+                          style={{ background: cs.color, bottom: -16, left: -16 }} />
+
+                        {/* Diagonal accent line */}
+                        <div className="absolute opacity-[0.12]"
+                          style={{ width: 1, height: 170, background: "linear-gradient(to bottom, transparent, rgba(255,255,255,0.5), transparent)", top: 0, left: "58%", transform: "rotate(28deg)", transformOrigin: "top" }} />
+
+                        {/* Animated shimmer */}
+                        <motion.div
+                          className="absolute inset-y-0 w-36 pointer-events-none"
+                          style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.07), transparent)" }}
+                          animate={{ x: ["-144px", "calc(100% + 144px)"] }}
+                          transition={{ duration: 2.4, repeat: Infinity, repeatDelay: 2.5 + i * 0.35, ease: "easeInOut" }}
+                        />
+
+                        {/* Floating stat badge */}
+                        <motion.div
+                          className="absolute top-5 left-5 rounded-2xl px-4 py-2.5 z-10"
+                          style={{ background: "rgba(0,0,0,0.42)", border: "1px solid rgba(255,255,255,0.18)" }}
+                          animate={{ y: [0, -5, 0] }}
+                          transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: i * 0.5 }}
+                        >
+                          <p className="font-black text-white text-lg leading-none">{cs.stat}</p>
+                          <p className="text-[9px] text-white/60 font-semibold mt-0.5 whitespace-nowrap">{cs.statLabel}</p>
+                        </motion.div>
+
+                        {/* Number badge — top-right */}
+                        <div className="absolute top-5 right-5 w-9 h-9 rounded-xl flex items-center justify-center z-10"
+                          style={{ background: "rgba(0,0,0,0.35)", border: "1px solid rgba(255,255,255,0.14)" }}>
+                          <span className="text-[11px] font-black text-white/55">{String(i + 1).padStart(2, "0")}</span>
+                        </div>
+
+                        {/* Top accent bar */}
+                        <div className="absolute top-0 left-0 right-0 h-[3px] z-10"
+                          style={{ background: `linear-gradient(90deg, ${cs.color}, ${cs.color}44)` }} />
+
+                        {/* Bottom dark fade */}
+                        <div className="absolute bottom-0 left-0 right-0 h-16"
+                          style={{ background: "linear-gradient(to top, rgba(22,22,22,0.92), transparent)" }} />
+
+                        {/* Hover colour wash */}
+                        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                          style={{ background: `radial-gradient(ellipse at 65% 40%, ${cs.color}30, transparent 65%)` }} />
+                      </div>
+
+                      {/* ── Content area ── */}
+                      <div className="flex flex-col flex-1 p-6 gap-3">
+                        <div className="flex items-center gap-2.5">
+                          <div className="w-4 h-px" style={{ backgroundColor: cs.color }} />
+                          <span className="text-[9px] font-black tracking-[0.28em] uppercase text-white/30">
+                            Pakistan Case Study
+                          </span>
+                        </div>
+
+                        <h3
+                          className="font-black text-white uppercase leading-[0.92] transition-all duration-300 group-hover:opacity-80"
+                          style={{ fontSize: "clamp(1.1rem, 2vw, 1.5rem)" }}
+                        >
+                          {cs.title}
+                        </h3>
+
+                        <p className="text-white/38 text-sm leading-relaxed">{cs.subtitle}</p>
+
+                        <div className="flex items-center justify-between mt-auto pt-4 border-t border-white/[0.07]">
+                          <div className="flex gap-3 flex-wrap">
+                            {cs.tags.map((t) => (
+                              <span key={t} className="text-[9px] font-black tracking-widest uppercase"
+                                style={{ color: cs.color + "aa" }}>
+                                {t}
+                              </span>
+                            ))}
+                          </div>
+                          <span className="inline-flex items-center gap-1.5 text-[10px] font-black uppercase tracking-wider group-hover:gap-2.5 transition-all duration-300"
+                            style={{ color: cs.color }}>
+                            View
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"
+                              className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-300">
+                              <path d="M5 12h14M12 5l7 7-7 7" />
+                            </svg>
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Card edge glow on hover */}
+                      <div
+                        className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                        style={{ boxShadow: `inset 0 0 0 1.5px ${cs.color}55` }}
+                      />
+                    </Link>
+                  </TiltCard>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </section>
       )}

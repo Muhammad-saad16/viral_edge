@@ -16,17 +16,39 @@ const serviceOptions = [
   "Full-Service Retainer",
 ];
 
+// ← Paste your Formspree form ID here (get it from formspree.io/dashboard)
+const FORMSPREE_URL = "https://formspree.io/f/xnjwbnww";
+
 export default function ContactPage() {
   const [form, setForm] = useState({ name: "", company: "", email: "", service: "", message: "" });
   const [sent, setSent] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => setForm((p) => ({ ...p, [e.target.name]: e.target.value }));
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSent(true);
+    setLoading(true);
+    setError(false);
+    try {
+      const res = await fetch(FORMSPREE_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (res.ok) {
+        setSent(true);
+      } else {
+        setError(true);
+      }
+    } catch {
+      setError(true);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -207,11 +229,16 @@ export default function ContactPage() {
                   className="w-full px-5 py-4 bg-white text-charcoal placeholder:text-charcoal/30 text-sm focus:outline-none focus:ring-2 focus:ring-white/70 transition resize-none shadow-sm"
                   style={{ borderRadius: "12px" }}
                 />
+                {error && (
+                  <p className="text-red-300 text-xs text-center -mb-1">
+                    Something went wrong. Please try again or WhatsApp us directly.
+                  </p>
+                )}
                 <div className="flex flex-col sm:flex-row gap-3 mt-2">
-                  <button type="submit"
-                    className="flex-1 py-4 text-sm font-black text-sage bg-white hover:bg-white/92 hover:shadow-2xl hover:-translate-y-1 transition-all uppercase tracking-widest"
+                  <button type="submit" disabled={loading}
+                    className="flex-1 py-4 text-sm font-black text-sage bg-white hover:bg-white/92 hover:shadow-2xl hover:-translate-y-1 transition-all uppercase tracking-widest disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:translate-y-0"
                     style={{ borderRadius: "40px" }}>
-                    Send Message
+                    {loading ? "Sending…" : "Send Message"}
                   </button>
                   <a href="https://wa.me/922135395533" target="_blank" rel="noopener noreferrer"
                     className="flex items-center justify-center gap-2 px-6 py-4 text-sm font-black text-white border-2 border-white/40 hover:border-white hover:bg-white/15 hover:-translate-y-1 transition-all uppercase tracking-wide"

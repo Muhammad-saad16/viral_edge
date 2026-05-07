@@ -1,9 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
 import { useRef, useState } from "react";
 import { useGeoRegion } from "@/hooks/useGeoRegion";
+import Logo from "@/components/Logo";
 
 const container = { hidden: {}, show: { transition: { staggerChildren: 0.1 } } };
 const item = { hidden: { opacity: 0, y: 40 }, show: { opacity: 1, y: 0, transition: { duration: 0.65 } } };
@@ -28,6 +29,66 @@ function LogoImage({ src, alt, accent }: { src: string; alt: string; accent: str
   return <img src={src} alt={alt} className="w-20 h-12 object-contain" onError={() => setBroken(true)} />;
 }
 
+function SmallLogo({ src, alt, accent }: { src: string; alt: string; accent: string }) {
+  const [broken, setBroken] = useState(false);
+  if (!src || broken) {
+    return <span className="text-[8px] font-black uppercase tracking-wide" style={{ color: accent }}>{alt.slice(0, 2)}</span>;
+  }
+  return <img src={src} alt={alt} className="w-9 h-7 object-contain" onError={() => setBroken(true)} />;
+}
+
+function WorkLogoImage({ src, alt }: { src: string; alt: string }) {
+  const [broken, setBroken] = useState(false);
+  if (broken) return <span className="text-xs font-black uppercase text-charcoal/30">{alt.slice(0, 2)}</span>;
+  return <img src={src} alt={alt} className="max-w-[75%] max-h-[75%] object-contain" onError={() => setBroken(true)} />;
+}
+
+function TiltCard({ children }: { children: React.ReactNode }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  const rotateX = useSpring(useTransform(y, [-0.5, 0.5], [6, -6]), { stiffness: 400, damping: 40 });
+  const rotateY = useSpring(useTransform(x, [-0.5, 0.5], [-6, 6]), { stiffness: 400, damping: 40 });
+  return (
+    <motion.div
+      ref={ref}
+      onMouseMove={(e) => {
+        const rect = ref.current?.getBoundingClientRect();
+        if (!rect) return;
+        x.set((e.clientX - rect.left) / rect.width - 0.5);
+        y.set((e.clientY - rect.top) / rect.height - 0.5);
+      }}
+      onMouseLeave={() => { x.set(0); y.set(0); }}
+      style={{ rotateX, rotateY, transformPerspective: 1000 }}
+      className="h-full"
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+type WorkItem = {
+  title: string; cat: string; color: string; accent: string;
+  gradFrom: string; gradTo: string;
+  initial: string; stat: string; statLabel: string;
+};
+
+const pakWorks: WorkItem[] = [
+  { title: "The Consorts Hotels & Resorts", cat: "Hospitality", color: "#c9a96e", accent: "#ffffff", gradFrom: "#2a1a0a", gradTo: "#14100a", initial: "CH", stat: "5★",   statLabel: "Brand Positioning" },
+  { title: "Virconia Perfumes",             cat: "Luxury",      color: "#9b59b6", accent: "#ffffff", gradFrom: "#1e0a2a", gradTo: "#110616", initial: "VP", stat: "40K+", statLabel: "Monthly Reach"     },
+  { title: "Bushirts by Mir Dilawer",       cat: "Fashion",     color: "#e74c3c", accent: "#ffffff", gradFrom: "#2a0a0a", gradTo: "#160606", initial: "BM", stat: "3×",   statLabel: "Sales Growth"      },
+  { title: "Proctor Exam Taker",            cat: "EdTech",      color: "#3498db", accent: "#ffffff", gradFrom: "#0a1a2a", gradTo: "#060e18", initial: "PE", stat: "10K+", statLabel: "Students Served"   },
+  { title: "Travel Wala",                   cat: "Travel",      color: "#ff6400", accent: "#ffffff", gradFrom: "#2a1000", gradTo: "#180800", initial: "TW", stat: "200+", statLabel: "Destinations"      },
+  { title: "Power-EX Lubricants",           cat: "B2B",         color: "#546b52", accent: "#ffffff", gradFrom: "#0a1a0a", gradTo: "#061006", initial: "PX", stat: "50+",  statLabel: "Business Partners" },
+];
+
+const uaeWorks: WorkItem[] = [
+  { title: "Aqua Pure",        cat: "Brand Identity", color: "#6b9b7a", accent: "#ffffff", gradFrom: "#2d5448", gradTo: "#162e28", initial: "AP", stat: "3×",   statLabel: "ROI"       },
+  { title: "Beyjeem",          cat: "Social Media",   color: "#ff6400", accent: "#ffffff", gradFrom: "#aa4200", gradTo: "#5c1e00", initial: "BJ", stat: "10K+", statLabel: "Followers" },
+  { title: "Aesthetic Clinic", cat: "Branding",       color: "#c9a96e", accent: "#c9a96e", gradFrom: "#1a1208", gradTo: "#0a0804", initial: "AC", stat: "5×",   statLabel: "Enquiries" },
+  { title: "Specialty Cafe",   cat: "Content",        color: "#9b7a4a", accent: "#ffffff", gradFrom: "#1c1208", gradTo: "#0a0804", initial: "SC", stat: "200%", statLabel: "Footfall"  },
+];
+
 const services = [
   { Icon: StoryIcon,  title: "Storytelling",          desc: "Brand narratives that connect emotionally and build lasting loyalty." },
   { Icon: VideoIcon,  title: "Video Content",         desc: "Scroll-stopping reels, films and short-form video built to perform."  },
@@ -37,14 +98,6 @@ const services = [
   { Icon: WebIcon,    title: "Websites & Apps",       desc: "Fast, modern websites built for conversion and great UX."            },
 ];
 
-const works = [
-  { title: "Jeeviez Kitchen", cat: "Branding", bg: "#546b5228", border: "#546b52", logo: "/logos/jeeviez.jpg"  },
-  { title: "Pepsi",           cat: "Content",  bg: "#ff640018", border: "#ff6400", logo: "/logos/pepsi.png"    },
-  { title: "Mortein",         cat: "Digital",  bg: "#2c2c2c14", border: "#3a3a3a", logo: "/logos/mortein.jpg"  },
-  { title: "Sunsilk",         cat: "Video",    bg: "#546b5220", border: "#546b52", logo: "/logos/sunsilk.jpg"  },
-  { title: "Knorr",           cat: "Social",   bg: "#ff640014", border: "#ff6400", logo: "/logos/knorr.jpg"    },
-  { title: "Tapal",           cat: "Ads",      bg: "#546b5230", border: "#546b52", logo: "/logos/tapal.jpg"    },
-];
 
 const team = [
   { initials: "AS", name: "Ahmad Shah",    role: "CEO",           color: "#546b52" },
@@ -55,7 +108,8 @@ const team = [
   { initials: "HK", name: "Hira Khan",     role: "Social Media",  color: "#3a4e39" },
 ];
 
-const clients = ["Pepsi", "Sunsilk", "Knorr", "Tapal", "Sooper", "Durex", "Mortein", "Layers", "EBM", "Almirah"];
+const pakClients = ["The Consorts Hotels & Resorts", "Virconia Perfumes", "Bushirts by Mir Dilawer", "Proctor Exam Taker", "Travel Wala", "Power-EX Lubricants"];
+const uaeClients = ["Aqua Pure Water Technologies", "Beyjeem Photography", "Aesthetic Clinic", "Specialty Cafe"];
 
 const uaeTestimonials = [
   {
@@ -94,6 +148,8 @@ const pakTestimonials = [
 export default function HomePage() {
   const region = useGeoRegion();
   const testimonials = region === "PAK" ? pakTestimonials : uaeTestimonials;
+  const activeClients = region === "PAK" ? pakClients : uaeClients;
+  const activeWorks   = region === "PAK" ? pakWorks   : uaeWorks;
   const heroRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
   const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
@@ -177,14 +233,14 @@ export default function HomePage() {
                   <motion.div
                     animate={{ y: [0, -10, 0] }}
                     transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
-                    className="w-36 h-36 bg-charcoal rounded-2xl flex flex-col items-center justify-center gap-2 shadow-2xl"
+                    className="w-36 h-36  rounded-2xl flex flex-col items-center justify-center gap-2 shadow-2xl"
                   >
-                    <div className="relative" style={{ width: 40, height: 46 }}>
-                      <div className="bg-[#ff6400]" style={{ width: 32, height: 32, borderRadius: 2 }} />
-                      <div className="absolute bg-[#1a1a1a]" style={{ width: 14, height: 14, top: 5, left: 9, borderRadius: 1 }} />
-                      <div className="absolute bg-[#ff6400]" style={{ width: 11, height: 11, top: 34, left: 0, borderRadius: 1 }} />
-                    </div>
-                    <span className="text-[9px] font-bold text-white/30 tracking-widest uppercase">SQRD Digital</span>
+                    {/* <svg width="48" height="50" viewBox="0 0 48 50" fill="none">
+                      <circle cx="22" cy="22" r="16" stroke="#ff6400" strokeWidth="5"/>
+                      <line x1="31" y1="32" x2="44" y2="46" stroke="#ff6400" strokeWidth="5" strokeLinecap="round"/>
+                    </svg>
+                    <span className="text-[9px] font-bold text-white/30 tracking-widest uppercase">SQRD Digital</span> */}
+                    <Logo />
                   </motion.div>
                 </div>
 
@@ -220,10 +276,10 @@ export default function HomePage() {
       {/* ════════════════ TRUSTED BRANDS ════════════════ */}
       <div className="bg-sage-light border-y border-sage/15 py-5 overflow-hidden">
         <p className="text-center text-[10px] font-bold tracking-[0.3em] uppercase text-charcoal/35 mb-4">
-          Trusted by 150+ Brands across Pakistan &amp; UAE
+          Trusted by Many Brands 
         </p>
         <div className="flex animate-marquee whitespace-nowrap">
-          {[...clients, ...clients, ...clients].map((c, i) => (
+          {[...activeClients, ...activeClients, ...activeClients, ...activeClients].map((c, i) => (
             <span key={i} className="inline-flex items-center gap-6 px-8 text-sm font-bold text-charcoal/25 uppercase tracking-widest">
               {c}
               <span className="inline-block w-1 h-1 rounded-sm bg-sage/40" />
@@ -377,41 +433,149 @@ export default function HomePage() {
       {/* ════════════════ FEATURED PROJECTS ════════════════ */}
       <section className="bg-charcoal py-24">
         <div className="max-w-7xl mx-auto px-5 lg:px-10">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12">
-            <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-              className="font-black text-white uppercase leading-[0.9]"
-              style={{ fontSize: "clamp(1.6rem, 7vw, 5.5rem)" }}>
-              FEATURED<br />
-              <span className="text-orange">PROJECTS</span>
-            </motion.h2>
-            <Link href="/portfolio"
-              className="flex-shrink-0 inline-flex items-center px-6 py-3 rounded-full text-sm font-bold text-charcoal bg-white hover:bg-white/90 hover:-translate-y-0.5 transition-all uppercase tracking-wider">
-              See more work
-            </Link>
+
+          {/* Header */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-8 mb-12">
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+              <p className="text-[10px] font-bold tracking-[0.25em] uppercase text-white/35 mb-2">Selected Work</p>
+              <h2 className="font-black text-white uppercase leading-[0.9]"
+                style={{ fontSize: "clamp(1rem, 2.2vw, 1.7rem)" }}>
+                FEATURED<br />
+                <span className="text-orange">PROJECTS</span>
+              </h2>
+            </motion.div>
+
+            <div className="flex flex-col gap-3 items-start sm:items-end">
+              <div className="flex gap-2 flex-wrap justify-end">
+                {activeWorks.map((w, i) => (
+                  <motion.div key={w.title}
+                    initial={{ opacity: 0, scale: 0.8 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }}
+                    transition={{ delay: i * 0.06 }}
+                    className="w-11 h-11 rounded-xl overflow-hidden flex items-center justify-center"
+                    style={{ background: `linear-gradient(135deg,${w.gradFrom},${w.gradTo})`, border: `1.5px solid ${w.color}30` }}>
+                    <span className="text-[8px] font-black text-white/70">{w.initial}</span>
+                  </motion.div>
+                ))}
+              </div>
+              <Link href="/portfolio"
+                className="flex-shrink-0 inline-flex items-center gap-1.5 px-6 py-3 rounded-full text-sm font-bold text-charcoal bg-white hover:bg-white/90 hover:-translate-y-0.5 transition-all uppercase tracking-wider">
+                See more work
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="w-3.5 h-3.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </Link>
+            </div>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-            {works.map((w, i) => (
+          {/* Cards grid */}
+          <div
+            className={`grid gap-5 ${region === "PAK" ? "grid-cols-2 md:grid-cols-3" : "grid-cols-1 sm:grid-cols-2"}`}
+            style={{ perspective: "1400px" }}
+          >
+            {activeWorks.map((w, i) => (
               <motion.div key={w.title}
-                initial={{ opacity: 0, scale: 0.9, y: 20 }} whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                viewport={{ once: true, margin: "-30px" }} transition={{ delay: (i % 3) * 0.08, duration: 0.45 }}
-                whileHover={{ scale: 1.03, y: -5 }}
-                className="group aspect-square rounded-2xl relative overflow-hidden cursor-default flex flex-col justify-between p-5"
-                style={{ backgroundColor: w.bg, border: `1.5px solid ${w.border}28` }}>
-                <div className="h-0.5 w-10 rounded-full" style={{ backgroundColor: w.border }} />
-                <div className="flex items-center justify-center flex-1 py-2">
-                  <LogoImage src={w.logo} alt={w.title} accent={w.border} />
-                </div>
-                <div>
-                  <p className="text-sm font-black text-charcoal leading-tight mb-2">{w.title}</p>
-                  <span className="inline-block px-2.5 py-0.5 rounded-md text-[10px] font-bold text-white"
-                    style={{ backgroundColor: w.border + "cc" }}>
-                    {w.cat}
-                  </span>
-                </div>
-                <div className="absolute inset-0 bg-charcoal/88 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center rounded-2xl">
-                  <span className="text-white text-sm font-bold tracking-wide">View Project</span>
-                </div>
+                initial={{ opacity: 0, y: 60, scale: 0.9 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: true, margin: "-30px" }}
+                transition={{ delay: i * 0.1, duration: 0.65, ease: [0.23, 1, 0.32, 1] }}
+                className="h-full"
+              >
+                <TiltCard>
+                  <div
+                    className="group relative flex flex-col h-full rounded-3xl overflow-hidden cursor-default"
+                    style={{ background: "#161616", border: `1.5px solid ${w.color}22` }}
+                  >
+                    {/* ── Abstract art area ── */}
+                    <div className="relative h-44 overflow-hidden flex-shrink-0"
+                      style={{ background: `linear-gradient(135deg, ${w.gradFrom}, ${w.gradTo})` }}>
+
+                      {/* Dot grid */}
+                      <div className="absolute inset-0"
+                        style={{ backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.09) 1px, transparent 1px)", backgroundSize: "16px 16px" }} />
+
+                      {/* Ghost initial — large art text */}
+                      <span
+                        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-black select-none pointer-events-none"
+                        style={{ fontSize: 120, color: "rgba(255,255,255,0.045)", lineHeight: 1 }}>
+                        {w.initial}
+                      </span>
+
+                      {/* Decorative ring — top-right */}
+                      <div className="absolute rounded-full border-[1.5px] opacity-25"
+                        style={{ width: 90, height: 90, borderColor: w.color, top: -22, right: -22 }} />
+                      {/* Decorative ring — inner */}
+                      <div className="absolute rounded-full border opacity-15"
+                        style={{ width: 54, height: 54, borderColor: w.accent, top: 8, right: 8 }} />
+
+                      {/* Soft orb — bottom-left glow */}
+                      <div className="absolute w-24 h-24 rounded-full blur-2xl opacity-30"
+                        style={{ background: w.color, bottom: -12, left: -12 }} />
+
+                      {/* Thin diagonal accent line */}
+                      <div className="absolute opacity-15"
+                        style={{ width: 1, height: 140, background: `linear-gradient(to bottom, transparent, ${w.accent}, transparent)`, top: 0, left: "55%", transform: "rotate(25deg)", transformOrigin: "top" }} />
+
+                      {/* Animated shimmer sweep */}
+                      <motion.div
+                        className="absolute inset-y-0 w-32 pointer-events-none"
+                        style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.07), transparent)" }}
+                        animate={{ x: ["-128px", "calc(100% + 128px)"] }}
+                        transition={{ duration: 2.2, repeat: Infinity, repeatDelay: 3 + i * 0.35, ease: "easeInOut" }}
+                      />
+
+                      {/* Floating stat badge */}
+                      <motion.div
+                        className="absolute top-4 left-4 rounded-xl px-3 py-2 z-10"
+                        style={{ background: "rgba(0,0,0,0.42)", border: "1px solid rgba(255,255,255,0.15)" }}
+                        animate={{ y: [0, -4, 0] }}
+                        transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut", delay: i * 0.45 }}
+                      >
+                        <p className="font-black text-white text-sm leading-none">{w.stat}</p>
+                        <p className="text-[8px] text-white/60 font-semibold mt-0.5 whitespace-nowrap">{w.statLabel}</p>
+                      </motion.div>
+
+                      {/* Top accent bar */}
+                      <div className="absolute top-0 left-0 right-0 h-[3px]"
+                        style={{ background: `linear-gradient(90deg, ${w.color}, ${w.color}44)` }} />
+
+                      {/* Bottom dark fade into card */}
+                      <div className="absolute bottom-0 left-0 right-0 h-12"
+                        style={{ background: "linear-gradient(to top, #161616, transparent)" }} />
+
+                      {/* Hover color wash */}
+                      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                        style={{ background: `radial-gradient(ellipse at 65% 40%, ${w.color}30, transparent 65%)` }} />
+                    </div>
+
+                    {/* ── Content area ── */}
+                    <div className="flex flex-col flex-1 px-5 pt-4 pb-5 gap-2.5">
+                      <div className="flex items-center gap-2">
+                        <div className="w-3 h-px" style={{ backgroundColor: w.color }} />
+                        <span className="text-[8px] font-black tracking-[0.25em] uppercase text-white/30">
+                          {region === "UAE" ? "UAE Case Study" : "Pakistan Case Study"}
+                        </span>
+                      </div>
+
+                      <p className="font-black text-white uppercase leading-tight text-sm">{w.title}</p>
+
+                      <div className="flex items-center justify-between mt-auto pt-3 border-t border-white/[0.07]">
+                        <span className="inline-block px-2.5 py-1 rounded-lg text-[9px] font-black uppercase tracking-wider"
+                          style={{ background: w.color + "22", color: w.color }}>
+                          {w.cat}
+                        </span>
+                        <span className="text-[10px] font-black uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center gap-1"
+                          style={{ color: w.color }}>
+                          View
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="w-3 h-3 group-hover:translate-x-0.5 transition-transform">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                          </svg>
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Card edge glow on hover */}
+                    <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                      style={{ boxShadow: `inset 0 0 0 1.5px ${w.color}55` }} />
+                  </div>
+                </TiltCard>
               </motion.div>
             ))}
           </div>
