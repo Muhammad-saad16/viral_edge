@@ -6,9 +6,7 @@ import { useRef, useState } from "react";
 import { useGeoRegion } from "@/hooks/useGeoRegion";
 
 const pakPortfolioClients = [
-  "Jeeviez Kitchen", "Pepsi", "Mortein", "Knorr",
-  "Tapal", "Sunsilk", "Sooper", "Durex", "Layers",
-  "Almirah", "EBM", "J. Junaid Jamshed",
+  "The Consorts Hotels & Resorts", "Virconia Perfumes", "Bushirts by Mir Dilawer", "Proctor Exam Taker", "Travel Wala", "Power-EX Lubricants"
 ];
 const uaePortfolioClients = [
   "Aqua Pure Water Technologies", "Beyjeem Photography", "Aesthetic Clinic", "Specialty Cafe",
