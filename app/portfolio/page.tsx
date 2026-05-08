@@ -72,7 +72,7 @@ const pakCaseStudies = [
   {
     title: "The Consorts Hotels & Resorts",
     subtitle: "Luxury hospitality brand built for discerning Pakistani travellers seeking premium experiences.",
-    route: "/portfolio/consorts-hotels",
+    route: "/portfolio/pakistan",
     color: "#c9a96e",
     gradFrom: "#2a1a0a",
     gradTo: "#14100a",
@@ -84,7 +84,7 @@ const pakCaseStudies = [
   {
     title: "Virconia Perfumes",
     subtitle: "Fragrance identity and luxury social presence crafted to reach high-intent Pakistani buyers.",
-    route: "/portfolio/virconia-perfumes",
+    route: "/portfolio/pakistan",
     color: "#9b59b6",
     gradFrom: "#1e0a2a",
     gradTo: "#110616",
@@ -96,7 +96,7 @@ const pakCaseStudies = [
   {
     title: "Bushirts by Mir Dilawer",
     subtitle: "Fashion-forward campaigns that tripled online sales for this emerging Pakistani clothing label.",
-    route: "/portfolio/bushirts",
+    route: "/portfolio/pakistan",
     color: "#e74c3c",
     gradFrom: "#2a0a0a",
     gradTo: "#160606",
@@ -108,7 +108,7 @@ const pakCaseStudies = [
   {
     title: "Proctor Exam Taker",
     subtitle: "EdTech digital marketing driving student enrolments for Pakistan's leading exam platform.",
-    route: "/portfolio/proctor-exam",
+    route: "/portfolio/pakistan",
     color: "#3498db",
     gradFrom: "#0a1a2a",
     gradTo: "#060e18",
@@ -120,7 +120,7 @@ const pakCaseStudies = [
   {
     title: "Travel Wala",
     subtitle: "Campaign-led growth strategy putting Pakistan's top travel aggregator on every traveller's radar.",
-    route: "/portfolio/travel-wala",
+    route: "/portfolio/pakistan",
     color: "#ff6400",
     gradFrom: "#2a1000",
     gradTo: "#180800",
@@ -132,7 +132,7 @@ const pakCaseStudies = [
   {
     title: "Power-EX Lubricants",
     subtitle: "B2B brand authority and digital pipeline built for Pakistan's high-performance lubricants market.",
-    route: "/portfolio/power-ex",
+    route: "/portfolio/pakistan",
     color: "#546b52",
     gradFrom: "#0a1a0a",
     gradTo: "#061006",
@@ -202,8 +202,8 @@ export default function PortfolioPage() {
               </motion.p>
               <motion.h1
                 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.65 }}
-                className="font-black text-charcoal uppercase leading-[0.85] tracking-tight"
-                style={{ fontSize: "clamp(1.6rem, 4vw, 3rem)" }}
+                className="font-black text-sage uppercase leading-[0.85] tracking-tight"
+                style={{ fontSize: "clamp(2rem, 8vw, 7rem)" }}
               >
                 WHAT <span className="text-orange">WE</span>
                 <br />DO

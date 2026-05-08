@@ -176,7 +176,7 @@ export default function HomePage() {
             <div className="flex-1 max-w-2xl">
               <motion.h1 variants={item}
                 className="font-black text-charcoal uppercase leading-[0.9] tracking-tight mb-6"
-                style={{ fontSize: "clamp(2rem, 8vw, 7rem)" }}>
+                style={{ fontSize: "clamp(1.6rem, 5vw, 4.5rem)" }}>
                 WE SQUARE<br />
                 <span className="relative inline-block">
                   CHAOS INTO<br />CLARITY
@@ -479,8 +479,8 @@ export default function HomePage() {
                 className="h-full"
               >
                 <TiltCard>
-                  <div
-                    className="group relative flex flex-col h-full rounded-3xl overflow-hidden cursor-default"
+                  <Link href={region === "PAK" ? "/portfolio/pakistan" : "/portfolio"}
+                    className="group relative flex flex-col h-full rounded-3xl overflow-hidden"
                     style={{ background: "#161616", border: `1.5px solid ${w.color}22` }}
                   >
                     {/* ── Abstract art area ── */}
@@ -574,7 +574,7 @@ export default function HomePage() {
                     {/* Card edge glow on hover */}
                     <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
                       style={{ boxShadow: `inset 0 0 0 1.5px ${w.color}55` }} />
-                  </div>
+                  </Link>
                 </TiltCard>
               </motion.div>
             ))}
