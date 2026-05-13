@@ -85,8 +85,8 @@ const pakWorks: WorkItem[] = [
 const uaeWorks: WorkItem[] = [
   { title: "Aqua Pure",        cat: "Brand Identity", color: "#6b9b7a", accent: "#ffffff", gradFrom: "#2d5448", gradTo: "#162e28", initial: "AP", stat: "3×",   statLabel: "ROI"       },
   { title: "Beyjeem",          cat: "Social Media",   color: "#ff6400", accent: "#ffffff", gradFrom: "#aa4200", gradTo: "#5c1e00", initial: "BJ", stat: "10K+", statLabel: "Followers" },
-  { title: "Aesthetic Clinic", cat: "Branding",       color: "#c9a96e", accent: "#c9a96e", gradFrom: "#1a1208", gradTo: "#0a0804", initial: "AC", stat: "5×",   statLabel: "Enquiries" },
-  { title: "Specialty Cafe",   cat: "Content",        color: "#9b7a4a", accent: "#ffffff", gradFrom: "#1c1208", gradTo: "#0a0804", initial: "SC", stat: "200%", statLabel: "Footfall"  },
+  { title: "Aesthetic Clinic", cat: "Branding",       color: "#c9a96e", accent: "#c9a96e", gradFrom: "#2a1e0c", gradTo: "#1a1408", initial: "AC", stat: "5×",   statLabel: "Enquiries" },
+  { title: "Specialty Cafe",   cat: "Content",        color: "#9b7a4a", accent: "#ffffff", gradFrom: "#2a1e10", gradTo: "#1a1208", initial: "SC", stat: "200%", statLabel: "Footfall"  },
 ];
 
 const services = [
@@ -100,12 +100,13 @@ const services = [
 
 
 const team = [
-  { initials: "AS", name: "Ahmad Shah",    role: "CEO",           color: "#546b52" },
-  { initials: "SJ", name: "Sara Javed",    role: "Creative Lead", color: "#ff6400" },
-  { initials: "OM", name: "Omar Malik",    role: "Strategist",    color: "#3a4e39" },
-  { initials: "NB", name: "Nadia Bukhari", role: "Designer",      color: "#546b52" },
-  { initials: "ZR", name: "Zaid Raza",     role: "Dev Lead",      color: "#ff6400" },
-  { initials: "HK", name: "Hira Khan",     role: "Social Media",  color: "#3a4e39" },
+  { initials: "SK", name: "Saqib Ahmed Khan",    role: "Co-founder, Sales Strategist", color: "#546b52", photo: "/Squad/Saqib Ahmed Khan _ Co-founder_ Sales Strategist.jpg" },
+  { initials: "SI", name: "Syed Ibad ur Rehman", role: "Co-founder, Brand Manager",    color: "#ff6400", photo: "/Squad/Syed Ibad ur Rehman _ Co-founder_ Brand Manager.jpg"  },
+  { initials: "FF", name: "Fizha Farukh",         role: "Creative Head",                color: "#3a4e39", photo: "/Squad/Fizha Farukh _ Creative Head.jpg"                       },
+  { initials: "NA", name: "Nida Asim",             role: "Content Head",                 color: "#546b52", photo: "/Squad/Nida Asim _ Content Head.jpg"                           },
+  { initials: "AA", name: "Agha Alamdar Abbas",   role: "Graphic Designer",             color: "#ff6400", photo: "/Squad/Agha Alamdar Abbas _ Graphic Designer.png"              },
+  { initials: "IA", name: "Ifrah Asif",            role: "Business Dev Executive",       color: "#3a4e39", photo: "/Squad/Ifrah Asif _ Business Development Executive.png"        },
+  { initials: "SH", name: "Syed Assam Hassan",    role: "Operations Executive",         color: "#546b52", photo: "/Squad/Syed Assam Hassan _ Operations Executive.png"               },
 ];
 
 const pakClients = ["The Consorts Hotels & Resorts", "Virconia Perfumes", "Bushirts by Mir Dilawer", "Proctor Exam Taker", "Travel Wala", "Power-EX Lubricants"];
@@ -144,6 +145,21 @@ const pakTestimonials = [
     author: "Lead", role: "Proctor Exam Taker", color: "#546b52",
   },
 ];
+
+function SquadPhoto({ src, alt, color, initials }: { src: string; alt: string; color: string; initials: string }) {
+  const [broken, setBroken] = useState(false);
+  return (
+    <div className="relative h-32 overflow-hidden" style={{ background: color + "33" }}>
+      {!broken ? (
+        <img src={src} alt={alt} className="w-full h-full object-cover object-top" onError={() => setBroken(true)} />
+      ) : (
+        <div className="w-full h-full flex items-center justify-center">
+          <span className="text-3xl font-black" style={{ color }}>{initials}</span>
+        </div>
+      )}
+    </div>
+  );
+}
 
 export default function HomePage() {
   const region = useGeoRegion();
@@ -247,7 +263,7 @@ export default function HomePage() {
                 {[
                   { label: "150+ Clients",  top: "4%",  left: "56%", bg: "#546b52", delay: 0   },
                   { label: "500+ Projects", top: "80%", left: "2%",  bg: "#ff6400", delay: 0.5 },
-                  { label: "98% Retention", top: "76%", left: "55%", bg: "#1a1a1a", delay: 1.0 },
+                  { label: "98% Retention", top: "76%", left: "55%", bg: "#3a4e39", delay: 1.0 },
                   { label: "5+ Years",      top: "8%",  left: "2%",  bg: "#3a4e39", delay: 1.5 },
                 ].map((chip) => (
                   <motion.div key={chip.label}
@@ -292,7 +308,7 @@ export default function HomePage() {
       <section className="relative bg-sage overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute -top-32 -right-32 w-96 h-96 rounded-full bg-white/6" />
-          <div className="absolute -bottom-32 -left-32 w-80 h-80 rounded-full bg-black/8" />
+          <div className="absolute -bottom-32 -left-32 w-80 h-80 rounded-full bg-sage-dark/20" />
         </div>
         <div className="relative max-w-7xl mx-auto px-5 lg:px-10 py-20 lg:py-28">
           <div className="flex flex-col lg:flex-row items-center gap-16">
@@ -342,8 +358,8 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-5 lg:px-10">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-14">
             <p className="text-xs font-bold tracking-[0.2em] uppercase text-sage mb-3">Our Process</p>
-            <h2 className="font-black text-charcoal uppercase" style={{ fontSize: "clamp(1.6rem, 6vw, 5rem)" }}>
-              HOW WE <span className="text-sage">WORK</span>
+            <h2 className="font-black text-sage uppercase" style={{ fontSize: "clamp(1.6rem, 6vw, 5rem)" }}>
+              HOW WE <span className="text-orange">WORK</span>
             </h2>
           </motion.div>
 
@@ -382,7 +398,7 @@ export default function HomePage() {
       </section>
 
       {/* ════════════════ THE SQRD SQUAD ════════════════ */}
-      <section className="bg-charcoal py-24">
+      <section className="bg-sage-dark py-24">
         <div className="max-w-7xl mx-auto px-5 lg:px-10">
           <div className="flex flex-col lg:flex-row items-center gap-16">
 
@@ -392,14 +408,13 @@ export default function HomePage() {
                 <motion.div key={m.name}
                   initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.07 }}
                   whileHover={{ y: -5, scale: 1.03 }}
-                  className="rounded-2xl p-4 flex flex-col items-center gap-2 cursor-default"
-                  style={{ backgroundColor: m.color + "22", border: `1.5px solid ${m.color}35` }}>
-                  <div className="w-11 h-11 rounded-xl flex items-center justify-center font-black text-sm text-white"
-                    style={{ backgroundColor: m.color }}>
-                    {m.initials}
+                  className="rounded-2xl overflow-hidden cursor-default"
+                  style={{ border: `1.5px solid ${m.color}40` }}>
+                  <SquadPhoto src={m.photo} alt={m.name} color={m.color} initials={m.initials} />
+                  <div className="px-3 py-2.5" style={{ backgroundColor: m.color + "1a" }}>
+                    <p className="text-[11px] font-bold text-white leading-tight truncate">{m.name}</p>
+                    <p className="text-[9px] text-white/50 mt-0.5 truncate">{m.role}</p>
                   </div>
-                  <p className="text-xs font-bold text-white text-center leading-tight">{m.name}</p>
-                  <p className="text-[10px] text-white/50 text-center">{m.role}</p>
                 </motion.div>
               ))}
             </motion.div>
@@ -431,7 +446,7 @@ export default function HomePage() {
       </section>
 
       {/* ════════════════ FEATURED PROJECTS ════════════════ */}
-      <section className="bg-charcoal py-24">
+      <section className="bg-sage-dark py-24">
         <div className="max-w-7xl mx-auto px-5 lg:px-10">
 
           {/* Header */}
@@ -481,7 +496,7 @@ export default function HomePage() {
                 <TiltCard>
                   <Link href={region === "PAK" ? "/portfolio/pakistan" : "/portfolio"}
                     className="group relative flex flex-col h-full rounded-3xl overflow-hidden"
-                    style={{ background: "#161616", border: `1.5px solid ${w.color}22` }}
+                    style={{ background: "#1a2a1a", border: `1.5px solid ${w.color}33` }}
                   >
                     {/* ── Abstract art area ── */}
                     <div className="relative h-44 overflow-hidden flex-shrink-0"
@@ -524,7 +539,7 @@ export default function HomePage() {
                       {/* Floating stat badge */}
                       <motion.div
                         className="absolute top-4 left-4 rounded-xl px-3 py-2 z-10"
-                        style={{ background: "rgba(0,0,0,0.42)", border: "1px solid rgba(255,255,255,0.15)" }}
+                        style={{ background: "rgba(26,26,26,0.72)", border: "1px solid rgba(255,255,255,0.15)" }}
                         animate={{ y: [0, -4, 0] }}
                         transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut", delay: i * 0.45 }}
                       >
@@ -538,7 +553,7 @@ export default function HomePage() {
 
                       {/* Bottom dark fade into card */}
                       <div className="absolute bottom-0 left-0 right-0 h-12"
-                        style={{ background: "linear-gradient(to top, #161616, transparent)" }} />
+                        style={{ background: "linear-gradient(to top, #1a2a1a, transparent)" }} />
 
                       {/* Hover color wash */}
                       <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
@@ -587,7 +602,7 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-5 lg:px-10">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-14">
             <p className="text-xs font-bold tracking-[0.2em] uppercase text-sage mb-3">What Clients Say</p>
-            <h2 className="font-black text-charcoal uppercase" style={{ fontSize: "clamp(1.6rem, 6vw, 5rem)" }}>
+            <h2 className="font-black text-sage uppercase" style={{ fontSize: "clamp(1.6rem, 6vw, 5rem)" }}>
               CLIENT <span className="text-orange">STORIES</span>
             </h2>
           </motion.div>
@@ -625,7 +640,7 @@ export default function HomePage() {
       <section className="bg-beige py-24">
         <div className="max-w-7xl mx-auto px-5 lg:px-10">
           <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-            className="relative bg-charcoal rounded-3xl overflow-hidden px-8 md:px-20 py-16 text-center">
+            className="relative bg-sage-dark rounded-3xl overflow-hidden px-8 md:px-20 py-16 text-center">
             <div className="absolute -top-20 -left-20 w-72 h-72 rounded-full"
               style={{ background: "radial-gradient(circle, #546b5218, transparent)" }} />
             <div className="absolute -bottom-20 -right-20 w-72 h-72 rounded-full"

@@ -37,7 +37,9 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16">
 
           <Link href="/" className="flex items-center">
-            <Logo className="h-16 w-auto" />
+            <Logo className="h-16
+            
+            w-auto" />
           </Link>
 
           {/* Desktop nav */}

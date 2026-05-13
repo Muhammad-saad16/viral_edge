@@ -2,22 +2,25 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { useState } from "react";
 
 function PersonCard({
   name,
   role,
+  photo,
   initials,
-  gradientFrom,
-  gradientTo,
+  color,
   delay = 0,
 }: {
   name: string;
   role: string;
+  photo: string;
   initials: string;
-  gradientFrom: string;
-  gradientTo: string;
+  color: string;
   delay?: number;
 }) {
+  const [broken, setBroken] = useState(false);
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 24 }}
@@ -27,66 +30,39 @@ function PersonCard({
       className="group"
     >
       {/* Photo card */}
-      <div
-        className="relative rounded-2xl overflow-hidden"
-        style={{ aspectRatio: "3 / 4" }}
-      >
-        {/* Gradient bg */}
-        <div
-          className="absolute inset-0"
-          style={{
-            background: `linear-gradient(160deg, ${gradientFrom}, ${gradientTo})`,
-          }}
-        />
+      <div className="relative rounded-2xl overflow-hidden" style={{ aspectRatio: "3 / 4" }}>
+        {/* Gradient bg fallback */}
+        <div className="absolute inset-0" style={{ background: `linear-gradient(160deg, ${color}cc, ${color}44)` }} />
+        <div className="absolute inset-0 opacity-[0.06]"
+          style={{ backgroundImage: "radial-gradient(rgba(255,255,255,0.8) 1px, transparent 1px)", backgroundSize: "14px 14px" }} />
 
-        {/* Subtle grid texture */}
-        <div
-          className="absolute inset-0 opacity-[0.06]"
-          style={{
-            backgroundImage: "radial-gradient(rgba(255,255,255,0.8) 1px, transparent 1px)",
-            backgroundSize: "14px 14px",
-          }}
-        />
-
-        {/* SVG person silhouette */}
-        <svg
-          viewBox="0 0 100 133"
-          className="absolute inset-0 w-full h-full"
-          preserveAspectRatio="xMidYMid slice"
-        >
-          <rect  x="43"  y="48" width="14" height="16" rx="5"  fill="rgba(255,255,255,0.30)" />
-          <circle cx="50" cy="35" r="22" fill="rgba(255,255,255,0.32)" />
-          <ellipse cx="50" cy="14" rx="22" ry="8" fill="rgba(255,255,255,0.18)" />
-          <path
-            d="M10 133 Q10 85 50 72 Q90 85 90 133 Z"
-            fill="rgba(255,255,255,0.22)"
+        {/* Real photo */}
+        {!broken ? (
+          <img
+            src={photo}
+            alt={name}
+            className="absolute inset-0 w-full h-full object-cover object-top"
+            onError={() => setBroken(true)}
           />
-          <path d="M10 100 Q0 115 5 133"  stroke="rgba(255,255,255,0.15)" strokeWidth="14" strokeLinecap="round" fill="none" />
-          <path d="M90 100 Q100 115 95 133" stroke="rgba(255,255,255,0.15)" strokeWidth="14" strokeLinecap="round" fill="none" />
-        </svg>
+        ) : (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <span className="text-5xl font-black text-white/40">{initials}</span>
+          </div>
+        )}
 
-        {/* Initials badge */}
-        <div className="absolute top-3 left-3">
-          <span className="text-[9px] font-black text-white/60 bg-white/15 px-2 py-0.5 rounded-full backdrop-blur-sm">
+        {/* Role badge top-left */}
+        <div className="absolute top-3 left-3 z-10">
+          <span className="text-[9px] font-black text-white/80 px-2 py-0.5 rounded-full backdrop-blur-sm"
+            style={{ background: color + "aa" }}>
             {initials}
           </span>
         </div>
 
         {/* Hover overlay */}
-        <div className="absolute inset-0 bg-charcoal/85 opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col items-center justify-center gap-2 p-4 backdrop-blur-sm">
-          <p className="text-white text-sm font-black text-center leading-tight">{name}</p>
-          <p className="text-white/55 text-[10px] text-center">{role}</p>
-          <div className="flex gap-2 mt-2">
-            {["IG", "LI"].map((s) => (
-              <a
-                key={s}
-                href="#"
-                className="w-8 h-8 rounded-full bg-white/15 flex items-center justify-center text-[10px] font-bold text-white hover:bg-sage transition-colors"
-              >
-                {s}
-              </a>
-            ))}
-          </div>
+        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col items-end justify-end p-4"
+          style={{ background: `linear-gradient(to top, ${color}ee 0%, transparent 60%)` }}>
+          <p className="text-white text-sm font-black leading-tight">{name}</p>
+          <p className="text-white/70 text-[10px] mt-0.5">{role}</p>
         </div>
       </div>
 
@@ -100,33 +76,15 @@ function PersonCard({
 }
 
 const team = [
-  { initials: "AS", name: "Ahmad Shah",     role: "CEO & Founder",        gFrom: "#546b52CC", gTo: "#3a4e3955" },
-  { initials: "SJ", name: "Sara Javed",     role: "Creative Director",    gFrom: "#ff6400CC", gTo: "#ff640044" },
-  { initials: "OM", name: "Omar Malik",     role: "Head of Strategy",     gFrom: "#3a4e39CC", gTo: "#546b5244" },
-  { initials: "NB", name: "Nadia Bukhari",  role: "Lead Designer",        gFrom: "#ff6400AA", gTo: "#546b5255" },
-  { initials: "ZR", name: "Zaid Raza",      role: "Dev Lead",             gFrom: "#546b52AA", gTo: "#ff640044" },
-  { initials: "HK", name: "Hira Khan",      role: "Social Media Manager", gFrom: "#546b52BB", gTo: "#546b5233" },
-  { initials: "AR", name: "Ali Rauf",       role: "Video Director",       gFrom: "#ff6400BB", gTo: "#1a1a1a33" },
-  { initials: "MF", name: "Maria Farooq",   role: "Ads Manager",          gFrom: "#3a4e39BB", gTo: "#546b5233" },
-  { initials: "TA", name: "Taha Abbasi",    role: "Copywriter",           gFrom: "#ff6400AA", gTo: "#ff640033" },
-  { initials: "RK", name: "Rida Khan",      role: "Graphic Designer",     gFrom: "#546b52AA", gTo: "#ff640044" },
-  { initials: "YS", name: "Yousaf Saeed",   role: "Photographer",         gFrom: "#ff6400BB", gTo: "#ff640033" },
-  { initials: "AM", name: "Ayesha Mir",     role: "Community Manager",    gFrom: "#546b52BB", gTo: "#546b5233" },
-  { initials: "FK", name: "Farhan Khalid",  role: "SEO Specialist",       gFrom: "#1a1a1a88", gTo: "#546b5244" },
-  { initials: "SB", name: "Sana Butt",      role: "Brand Strategist",     gFrom: "#ff6400AA", gTo: "#546b5244" },
-  { initials: "IM", name: "Imran Malik",    role: "Motion Designer",      gFrom: "#546b52CC", gTo: "#1a1a1a33" },
-  { initials: "ZF", name: "Zara Fatima",    role: "Account Manager",      gFrom: "#ff6400BB", gTo: "#ff640033" },
-  { initials: "NA", name: "Noman Ahmed",    role: "Frontend Dev",         gFrom: "#546b52AA", gTo: "#546b5233" },
-  { initials: "BH", name: "Bilal Hassan",   role: "Video Editor",         gFrom: "#1a1a1a77", gTo: "#ff640033" },
-  { initials: "SA", name: "Shanzay Ali",    role: "PR Specialist",        gFrom: "#546b52BB", gTo: "#546b5233" },
-  { initials: "KR", name: "Kamran Raza",    role: "Performance Manager",  gFrom: "#ff6400BB", gTo: "#1a1a1a33" },
-  { initials: "LJ", name: "Laiba Javed",    role: "UX Designer",          gFrom: "#546b52AA", gTo: "#ff640044" },
-  { initials: "WA", name: "Waqas Ahmed",    role: "Backend Dev",          gFrom: "#1a1a1a66", gTo: "#546b5244" },
-  { initials: "DK", name: "Dania Khan",     role: "Content Writer",       gFrom: "#ff6400BB", gTo: "#ff640033" },
-  { initials: "AB", name: "Asad Baig",      role: "3D Artist",            gFrom: "#546b52CC", gTo: "#546b5233" },
-  { initials: "MQ", name: "Maham Qureshi",  role: "Influencer Manager",   gFrom: "#ff6400AA", gTo: "#1a1a1a33" },
+  { initials: "SK", name: "Saqib Ahmed Khan",    role: "Co-founder, Sales Strategist", color: "#546b52", photo: "/Squad/Saqib Ahmed Khan _ Co-founder_ Sales Strategist.jpg" },
+  { initials: "SI", name: "Syed Ibad ur Rehman", role: "Co-founder, Brand Manager",    color: "#ff6400", photo: "/Squad/Syed Ibad ur Rehman _ Co-founder_ Brand Manager.jpg"  },
+  { initials: "FF", name: "Fizha Farukh",         role: "Creative Head",                color: "#3a4e39", photo: "/Squad/Fizha Farukh _ Creative Head.jpg"                       },
+  { initials: "NA", name: "Nida Asim",             role: "Content Head",                 color: "#546b52", photo: "/Squad/Nida Asim _ Content Head.jpg"                           },
+  { initials: "AA", name: "Agha Alamdar Abbas",   role: "Graphic Designer",             color: "#ff6400", photo: "/Squad/Agha Alamdar Abbas _ Graphic Designer.png"              },
+  { initials: "IA", name: "Ifrah Asif",            role: "Business Dev Executive",       color: "#3a4e39", photo: "/Squad/Ifrah Asif _ Business Development Executive.png"        },
+  { initials: "SH", name: "Syed Assam Hassan",    role: "Operations Executive",         color: "#546b52", photo: "/Squad/Syed Assam Hassan _ Operations Executive.png"               },
 ];
-
+ 
 const marqueeWords = [
   "CREATORS", "STRATEGISTS", "DESIGNERS", "DEVELOPERS",
   "STORYTELLERS", "MARKETERS", "INNOVATORS", "VISIONARIES",
@@ -173,7 +131,7 @@ export default function MeetTheSquadPage() {
               {[
                 { val: "25+", label: "Team Members",    color: "#546b52" },
                 { val: "5+",  label: "Years Together",  color: "#ff6400" },
-                { val: "7",   label: "Departments",     color: "#1a1a1a" },
+                { val: "7",   label: "Departments",     color: "#3a4e39" },
               ].map((chip) => (
                 <div
                   key={chip.label}
@@ -240,9 +198,9 @@ export default function MeetTheSquadPage() {
                 key={member.name}
                 name={member.name}
                 role={member.role}
+                photo={member.photo}
                 initials={member.initials}
-                gradientFrom={member.gFrom}
-                gradientTo={member.gTo}
+                color={member.color}
                 delay={(i % 5) * 0.06}
               />
             ))}
@@ -251,7 +209,7 @@ export default function MeetTheSquadPage() {
       </section>
 
       {/* ══════════════ CULTURE STRIP ══════════════ */}
-      <section className="bg-charcoal py-16">
+      <section className="bg-sage-dark py-16">
         <div className="max-w-7xl mx-auto px-5 lg:px-10">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {[

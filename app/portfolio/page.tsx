@@ -25,7 +25,7 @@ const uaeCaseStudies = [
     tags: ["Brand Identity", "Digital"],
     stat: "3×",
     statLabel: "ROI in 90 days",
-    logo: null as string | null,   // e.g. "/logos/aqua.png" when file exists
+    logo: "/logos/UAE Logos/logo transparent.png" as string | null,
   },
   {
     title: "Beyjeem Photography",
@@ -38,33 +38,33 @@ const uaeCaseStudies = [
     tags: ["Social Media", "Strategy"],
     stat: "10K+",
     statLabel: "Followers gained",
-    logo: null as string | null,   // e.g. "/logos/beyjeem.png"
+    logo: "/logos/UAE Logos/beyjeem.jpg" as string | null,
   },
   {
     title: "Aesthetic Clinic",
     subtitle: "Premium social presence generating real Abu Dhabi enquiries within 5 months.",
     route: "/portfolio/aesthetic-clinic",
     color: "#c9a96e",
-    gradFrom: "#2a2218",
-    gradTo: "#1a1510",
+    gradFrom: "#3a2e18",
+    gradTo: "#2a2010",
     initial: "AC",
     tags: ["Branding", "Social"],
     stat: "5×",
     statLabel: "Enquiries monthly",
-    logo: null as string | null,   // e.g. "/logos/aesthetic-clinic.png"
+    logo: null as string | null,
   },
   {
     title: "Specialty Cafe",
     subtitle: "Reels-led growth that turned Instagram followers into walk-in customers.",
     route: "/portfolio/specialty-cafe",
     color: "#546b52",
-    gradFrom: "#1a1a1a",
-    gradTo: "#2d2d2d",
+    gradFrom: "#2a3a2a",
+    gradTo: "#3d503d",
     initial: "SC",
     tags: ["Content", "Reels"],
     stat: "200%",
     statLabel: "Footfall increase",
-    logo: null as string | null,   // e.g. "/logos/specialty-cafe.png"
+    logo: null as string | null,
   },
 ];
 
@@ -74,60 +74,65 @@ const pakCaseStudies = [
     subtitle: "Luxury hospitality brand built for discerning Pakistani travellers seeking premium experiences.",
     route: "/portfolio/pakistan",
     color: "#c9a96e",
-    gradFrom: "#2a1a0a",
-    gradTo: "#14100a",
+    gradFrom: "#3a2a12",
+    gradTo: "#241a0c",
     initial: "CH",
     tags: ["Hospitality", "Branding"],
     stat: "5★",
     statLabel: "Brand Positioning",
+    logo: "/logos/pakistan_logos/The consorts.png" as string | null,
   },
   {
     title: "Virconia Perfumes",
     subtitle: "Fragrance identity and luxury social presence crafted to reach high-intent Pakistani buyers.",
     route: "/portfolio/pakistan",
     color: "#9b59b6",
-    gradFrom: "#1e0a2a",
-    gradTo: "#110616",
+    gradFrom: "#2e1440",
+    gradTo: "#1e0c28",
     initial: "VP",
     tags: ["Luxury", "Social Media"],
     stat: "40K+",
     statLabel: "Monthly Reach",
+    logo: "/logos/pakistan_logos/Virconia.png" as string | null,
   },
   {
     title: "Bushirts by Mir Dilawer",
     subtitle: "Fashion-forward campaigns that tripled online sales for this emerging Pakistani clothing label.",
     route: "/portfolio/pakistan",
     color: "#e74c3c",
-    gradFrom: "#2a0a0a",
-    gradTo: "#160606",
+    gradFrom: "#3a1212",
+    gradTo: "#280a0a",
     initial: "BM",
     tags: ["Fashion", "Content"],
     stat: "3×",
     statLabel: "Sales Growth",
+    logo: "/logos/pakistan_logos/Bushirts.png" as string | null,
   },
   {
     title: "Proctor Exam Taker",
     subtitle: "EdTech digital marketing driving student enrolments for Pakistan's leading exam platform.",
     route: "/portfolio/pakistan",
     color: "#3498db",
-    gradFrom: "#0a1a2a",
-    gradTo: "#060e18",
+    gradFrom: "#122240",
+    gradTo: "#0e1a30",
     initial: "PE",
     tags: ["EdTech", "Digital"],
     stat: "10K+",
     statLabel: "Students Served",
+    logo: "/logos/pakistan_logos/Proctor Exam Taker.png" as string | null,
   },
   {
     title: "Travel Wala",
     subtitle: "Campaign-led growth strategy putting Pakistan's top travel aggregator on every traveller's radar.",
     route: "/portfolio/pakistan",
     color: "#ff6400",
-    gradFrom: "#2a1000",
-    gradTo: "#180800",
+    gradFrom: "#3a1800",
+    gradTo: "#281000",
     initial: "TW",
     tags: ["Travel", "Campaigns"],
     stat: "200+",
     statLabel: "Destinations",
+    logo: "/logos/pakistan_logos/Travel Wala.png" as string | null,
   },
   {
     title: "Power-EX Lubricants",
@@ -140,6 +145,7 @@ const pakCaseStudies = [
     tags: ["Industrial", "B2B"],
     stat: "50+",
     statLabel: "Business Partners",
+    logo: "/logos/pakistan_logos/Power-Ex Lubricants.png" as string | null,
   },
 ];
 
@@ -237,7 +243,7 @@ export default function PortfolioPage() {
                 {[
                   { label: "Aqua pure water",  color: "#546b52", rot: "-6deg",  z: 0, tx: "0px",  ty: "0px"   },
                   { label: "Beyjeem Photography",  color: "#ff6400", rot: "3deg",   z: 1, tx: "20px", ty: "-10px" },
-                  { label: "Specialty Cafe",  color: "#1a1a1a", rot: "10deg",  z: 2, tx: "40px", ty: "-24px" },
+                  { label: "Specialty Cafe",  color: "#3a4e39", rot: "10deg",  z: 2, tx: "40px", ty: "-24px" },
                 ].map((card, i) => (
                   <motion.div key={card.label}
                     initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }}
@@ -281,7 +287,7 @@ export default function PortfolioPage() {
 
       {/* ══════════════ UAE CASE STUDIES ══════════════ */}
       {region === "UAE" && (
-        <section className="bg-charcoal py-24">
+        <section className="bg-sage-dark py-24">
           <div className="max-w-7xl mx-auto px-5 lg:px-10">
 
             <motion.div
@@ -311,7 +317,7 @@ export default function PortfolioPage() {
                   <TiltCard>
                     <Link href={cs.route}
                       className="group relative flex flex-col h-full rounded-3xl overflow-hidden"
-                      style={{ background: "#161616", border: `1.5px solid ${cs.color}22` }}
+                      style={{ background: "#1a2a1a", border: `1.5px solid ${cs.color}33` }}
                     >
                       {/* ── Abstract art area ── */}
                       <div className="relative h-52 overflow-hidden flex-shrink-0"
@@ -323,9 +329,18 @@ export default function PortfolioPage() {
 
                         {/* Ghost initial — centred art */}
                         <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-black select-none pointer-events-none"
-                          style={{ fontSize: 150, color: "rgba(255,255,255,0.045)", lineHeight: 1 }}>
+                          style={{ fontSize: 150, color: cs.logo ? "rgba(255,255,255,0.018)" : "rgba(255,255,255,0.045)", lineHeight: 1 }}>
                           {cs.initial}
                         </span>
+
+                        {/* Client logo */}
+                        {cs.logo && (
+                          <div className="absolute inset-0 flex items-center justify-center z-[5]">
+                            <div className="rounded-2xl px-5 py-3 backdrop-blur-md bg-white/15 border border-white/20 flex items-center justify-center">
+                              <img src={cs.logo} alt={cs.title} className="max-h-12 max-w-[130px] object-contain" />
+                            </div>
+                          </div>
+                        )}
 
                         {/* Ring — top-right */}
                         <div className="absolute rounded-full border-2 opacity-25"
@@ -353,7 +368,7 @@ export default function PortfolioPage() {
                         {/* Floating stat badge */}
                         <motion.div
                           className="absolute top-5 left-5 rounded-2xl px-4 py-2.5 z-10"
-                          style={{ background: "rgba(0,0,0,0.42)", border: "1px solid rgba(255,255,255,0.18)" }}
+                          style={{ background: "rgba(26,26,26,0.72)", border: "1px solid rgba(255,255,255,0.18)" }}
                           animate={{ y: [0, -5, 0] }}
                           transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: i * 0.5 }}
                         >
@@ -363,7 +378,7 @@ export default function PortfolioPage() {
 
                         {/* Number badge — top-right */}
                         <div className="absolute top-5 right-5 w-9 h-9 rounded-xl flex items-center justify-center z-10"
-                          style={{ background: "rgba(0,0,0,0.35)", border: "1px solid rgba(255,255,255,0.14)" }}>
+                          style={{ background: "rgba(26,26,26,0.65)", border: "1px solid rgba(255,255,255,0.14)" }}>
                           <span className="text-[11px] font-black text-white/55">{String(i + 1).padStart(2, "0")}</span>
                         </div>
 
@@ -373,7 +388,7 @@ export default function PortfolioPage() {
 
                         {/* Bottom dark fade */}
                         <div className="absolute bottom-0 left-0 right-0 h-16"
-                          style={{ background: "linear-gradient(to top, rgba(22,22,22,0.92), transparent)" }} />
+                          style={{ background: "linear-gradient(to top, rgba(26,26,26,0.92), transparent)" }} />
 
                         {/* Hover colour wash */}
                         <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
@@ -434,7 +449,7 @@ export default function PortfolioPage() {
 
       {/* ══════════════ PAKISTAN PORTFOLIO ══════════════ */}
       {region === "PAK" && (
-        <section className="bg-charcoal py-24">
+        <section className="bg-sage-dark py-24">
           <div className="max-w-7xl mx-auto px-5 lg:px-10">
 
             <motion.div
@@ -464,7 +479,7 @@ export default function PortfolioPage() {
                   <TiltCard>
                     <Link href={cs.route}
                       className="group relative flex flex-col h-full rounded-3xl overflow-hidden"
-                      style={{ background: "#161616", border: `1.5px solid ${cs.color}22` }}
+                      style={{ background: "#1a2a1a", border: `1.5px solid ${cs.color}33` }}
                     >
                       {/* ── Abstract art area ── */}
                       <div className="relative h-52 overflow-hidden flex-shrink-0"
@@ -476,9 +491,18 @@ export default function PortfolioPage() {
 
                         {/* Ghost initial — centred art */}
                         <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-black select-none pointer-events-none"
-                          style={{ fontSize: 150, color: "rgba(255,255,255,0.045)", lineHeight: 1 }}>
+                          style={{ fontSize: 150, color: cs.logo ? "rgba(255,255,255,0.018)" : "rgba(255,255,255,0.045)", lineHeight: 1 }}>
                           {cs.initial}
                         </span>
+
+                        {/* Client logo */}
+                        {cs.logo && (
+                          <div className="absolute inset-0 flex items-center justify-center z-[5]">
+                            <div className="rounded-2xl px-5 py-3 backdrop-blur-md bg-white/15 border border-white/20 flex items-center justify-center">
+                              <img src={cs.logo} alt={cs.title} className="max-h-12 max-w-[130px] object-contain" />
+                            </div>
+                          </div>
+                        )}
 
                         {/* Ring — top-right */}
                         <div className="absolute rounded-full border-2 opacity-25"
@@ -506,7 +530,7 @@ export default function PortfolioPage() {
                         {/* Floating stat badge */}
                         <motion.div
                           className="absolute top-5 left-5 rounded-2xl px-4 py-2.5 z-10"
-                          style={{ background: "rgba(0,0,0,0.42)", border: "1px solid rgba(255,255,255,0.18)" }}
+                          style={{ background: "rgba(26,26,26,0.72)", border: "1px solid rgba(255,255,255,0.18)" }}
                           animate={{ y: [0, -5, 0] }}
                           transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: i * 0.5 }}
                         >
@@ -516,7 +540,7 @@ export default function PortfolioPage() {
 
                         {/* Number badge — top-right */}
                         <div className="absolute top-5 right-5 w-9 h-9 rounded-xl flex items-center justify-center z-10"
-                          style={{ background: "rgba(0,0,0,0.35)", border: "1px solid rgba(255,255,255,0.14)" }}>
+                          style={{ background: "rgba(26,26,26,0.65)", border: "1px solid rgba(255,255,255,0.14)" }}>
                           <span className="text-[11px] font-black text-white/55">{String(i + 1).padStart(2, "0")}</span>
                         </div>
 
@@ -526,7 +550,7 @@ export default function PortfolioPage() {
 
                         {/* Bottom dark fade */}
                         <div className="absolute bottom-0 left-0 right-0 h-16"
-                          style={{ background: "linear-gradient(to top, rgba(22,22,22,0.92), transparent)" }} />
+                          style={{ background: "linear-gradient(to top, rgba(26,26,26,0.92), transparent)" }} />
 
                         {/* Hover colour wash */}
                         <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
