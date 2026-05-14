@@ -69,7 +69,7 @@ export default function PostForRentPage() {
   return (
     <>
       {/* ══════════════ DARK HERO ══════════════ */}
-      <section className="bg-charcoal pt-16 min-h-[72vh] flex items-center overflow-hidden relative">
+      <section className="bg-sage-dark pt-16 min-h-[72vh] flex items-center overflow-hidden relative">
         {/* Bg decoration */}
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full"
@@ -269,7 +269,7 @@ export default function PostForRentPage() {
       </section>
 
       {/* ══════════════ DATA / TOOLS ══════════════ */}
-      <section className="bg-charcoal py-24 overflow-hidden relative">
+      <section className="bg-sage-dark py-24 overflow-hidden relative">
         <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full pointer-events-none"
           style={{ background: "radial-gradient(circle, #7A9E7E15 0%, transparent 65%)" }} />
         <div className="relative max-w-7xl mx-auto px-5 lg:px-10">

@@ -21,7 +21,7 @@ export default function Footer() {
           <div>
             {/* Logo — original colors, no filter */}
             <img
-              src="/logo.png"
+              src="/FIle.psd.png"
               alt="SQRD Digital"
               className="h-12 w-auto mb-5 object-contain"
             />

@@ -18,7 +18,7 @@ const services = [
   { num: "03", Icon: DesignIcon,    title: "Design",                 desc: "Stunning visuals and identities that align with your brand and make you impossible to ignore.", color: "#3a4e39", bg: "#3a4e39" },
   { num: "04", Icon: MarketingIcon, title: "Performance Marketing",  desc: "Data-driven paid campaigns on Meta, Google and TikTok. Every rupee tracked and optimised.",  color: "#ff6400", bg: "#ff6400" },
   { num: "05", Icon: CameraIcon,    title: "In-house Photography",   desc: "Professional shoots planned and delivered entirely by our internal creative team.",           color: "#546b52", bg: "#546b52" },
-  { num: "06", Icon: WebIcon,       title: "Websites & Apps",        desc: "Fast, modern websites and digital apps built for conversion and exceptional UX.",              color: "#1a1a1a", bg: "#1a1a1a" },
+  { num: "06", Icon: WebIcon,       title: "Websites & Apps",        desc: "Fast, modern websites and digital apps built for conversion and exceptional UX.",              color: "#3a4e39", bg: "#3a4e39" },
   { num: "07", Icon: PRIcon,        title: "Digital PR",             desc: "Strategic PR placements and influencer partnerships that amplify your message.",               color: "#546b52", bg: "#546b52" },
 ];
 
@@ -72,7 +72,7 @@ export default function ServicesPage() {
               <div className="relative w-64 h-80 lg:w-80 lg:h-96">
                 <div className="absolute inset-0 rounded-full blur-3xl opacity-30"
                   style={{ background: "radial-gradient(circle, #546b52, #ff6400)" }} />
-                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-36 h-64 lg:w-44 lg:h-72 bg-charcoal rounded-3xl shadow-2xl flex flex-col overflow-hidden border border-white/10">
+                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-36 h-64 lg:w-44 lg:h-72 bg-sage-dark rounded-3xl shadow-2xl flex flex-col overflow-hidden border border-white/10">
                   <div className="flex justify-center pt-3 pb-2">
                     <div className="w-12 h-1.5 bg-white/20 rounded-full" />
                   </div>
@@ -101,7 +101,7 @@ export default function ServicesPage() {
       </section>
 
       {/* ══ STATS BAR ══ */}
-      <div className="bg-charcoal py-6">
+      <div className="bg-sage-dark py-6">
         <div className="max-w-7xl mx-auto px-5 lg:px-10">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             {stats.map((s, i) => (
@@ -170,13 +170,13 @@ export default function ServicesPage() {
       <section className="bg-sage py-20 overflow-hidden relative">
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute -top-40 -right-40 w-[500px] h-[500px] rounded-full bg-white/5" />
-          <div className="absolute -bottom-40 -left-40 w-[400px] h-[400px] rounded-full bg-black/10" />
+          <div className="absolute -bottom-40 -left-40 w-[400px] h-[400px] rounded-full bg-sage-dark/30" />
         </div>
         <div className="relative max-w-7xl mx-auto px-5 lg:px-10">
           <motion.h2 initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
             className="font-black text-white uppercase text-center mb-14"
             style={{ fontSize: "clamp(2rem, 5vw, 4rem)" }}>
-            HOW WE <span className="text-charcoal">WORK</span>
+            HOW WE <span className="text-orange">WORK</span>
           </motion.h2>
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
@@ -212,7 +212,7 @@ export default function ServicesPage() {
       <section className="bg-beige py-24">
         <div className="max-w-7xl mx-auto px-5 lg:px-10">
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-            className="relative bg-charcoal px-8 md:px-20 py-16 overflow-hidden text-center"
+            className="relative bg-sage-dark px-8 md:px-20 py-16 overflow-hidden text-center"
             style={{ borderRadius: "24px" }}>
             <div className="absolute -top-16 -left-16 w-64 h-64 rounded-full"
               style={{ background: "radial-gradient(circle, #546b5225, transparent)" }} />

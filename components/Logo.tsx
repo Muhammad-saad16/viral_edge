@@ -8,7 +8,7 @@ export default function Logo({
   return (
     // eslint-disable-next-line @next/next/no-img-element
     <img
-      src="/logo.png"
+      src="/FIle.psd.png"
       alt="SQRD Digital"
       className={className}
       style={{
