@@ -100,10 +100,10 @@ const services = [
 
 
 const team = [
-  { initials: "SK", name: "Saqib Ahmed Khan",    role: "Co-founder, Sales Strategist", color: "#546b52", photo: "/Squad/Saqib Ahmed Khan _ Co-founder_ Sales Strategist.jpg" },
-  { initials: "SI", name: "Syed Ibad ur Rehman", role: "Co-founder, Brand Manager",    color: "#ff6400", photo: "/Squad/Syed Ibad ur Rehman _ Co-founder_ Brand Manager.jpg"  },
-  { initials: "FF", name: "Fizha Farukh",         role: "Creative Head",                color: "#3a4e39", photo: "/Squad/Fizha Farukh _ Creative Head.jpg"                       },
-  { initials: "NA", name: "Nida Asim",             role: "Content Head",                 color: "#546b52", photo: "/Squad/Nida Asim _ Content Head.jpg"                           },
+  { initials: "SK", name: "Saqib Ahmed Khan",    role: "Co-founder, Sales Strategist", color: "#546b52", photo: "/Squad/Saqib Ahmed Khan _ Co-founder_ Sales Strategist.png" },
+  { initials: "SI", name: "Syed Ibad ur Rehman", role: "Co-founder, Brand Manager",    color: "#ff6400", photo: "/Squad/Syed Ibad ur Rehman _ Co-founder_ Brand Manager.png"  },
+  { initials: "FF", name: "Fizha Farukh",         role: "Creative Head",                color: "#3a4e39", photo: "/Squad/Fizha Farukh _ Creative Head.png"                       },
+  { initials: "NA", name: "Nida Asim",             role: "Content Head",                 color: "#546b52", photo: "/Squad/Nida Asim _ Content Head.png"                           },
   { initials: "AA", name: "Agha Alamdar Abbas",   role: "Graphic Designer",             color: "#ff6400", photo: "/Squad/Agha Alamdar Abbas _ Graphic Designer.png"              },
   { initials: "IA", name: "Ifrah Asif",            role: "Business Dev Executive",       color: "#3a4e39", photo: "/Squad/Ifrah Asif _ Business Development Executive.png"        },
   { initials: "SH", name: "Syed Assam Hassan",    role: "Operations Executive",         color: "#546b52", photo: "/Squad/Syed Assam Hassan _ Operations Executive.png"               },
