@@ -149,7 +149,6 @@ const pakCaseStudies = [
   },
 ];
 
-// ── CaseStudyLogoImage: shows logo if src exists, else null (caller handles fallback)
 function CaseStudyLogoImage({ src, alt }: { src: string; alt: string }) {
   const [broken, setBroken] = useState(false);
   if (broken) return null;
@@ -157,7 +156,7 @@ function CaseStudyLogoImage({ src, alt }: { src: string; alt: string }) {
     <img
       src={src}
       alt={alt}
-      className="max-w-[60%] max-h-[55%] object-contain relative z-10"
+      className="w-full h-full object-cover"
       onError={() => setBroken(true)}
     />
   );
@@ -333,12 +332,10 @@ export default function PortfolioPage() {
                           {cs.initial}
                         </span>
 
-                        {/* Client logo */}
+                        {/* Client logo — full art area */}
                         {cs.logo && (
-                          <div className="absolute inset-0 flex items-center justify-center z-[5]">
-                            <div className="rounded-2xl px-5 py-3 backdrop-blur-md bg-white/15 border border-white/20 flex items-center justify-center">
-                              <img src={cs.logo} alt={cs.title} className="max-h-12 max-w-[130px] object-contain" />
-                            </div>
+                          <div className="absolute inset-0 z-[5]">
+                            <CaseStudyLogoImage src={cs.logo} alt={cs.title} />
                           </div>
                         )}
 
@@ -495,12 +492,10 @@ export default function PortfolioPage() {
                           {cs.initial}
                         </span>
 
-                        {/* Client logo */}
+                        {/* Client logo — full art area */}
                         {cs.logo && (
-                          <div className="absolute inset-0 flex items-center justify-center z-[5]">
-                            <div className="rounded-2xl px-5 py-3 backdrop-blur-md bg-white/15 border border-white/20 flex items-center justify-center">
-                              <img src={cs.logo} alt={cs.title} className="max-h-12 max-w-[130px] object-contain" />
-                            </div>
+                          <div className="absolute inset-0 z-[5]">
+                            <CaseStudyLogoImage src={cs.logo} alt={cs.title} />
                           </div>
                         )}
 

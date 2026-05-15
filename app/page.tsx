@@ -39,8 +39,8 @@ function SmallLogo({ src, alt, accent }: { src: string; alt: string; accent: str
 
 function WorkLogoImage({ src, alt }: { src: string; alt: string }) {
   const [broken, setBroken] = useState(false);
-  if (broken) return <span className="text-xs font-black uppercase text-charcoal/30">{alt.slice(0, 2)}</span>;
-  return <img src={src} alt={alt} className="max-w-[75%] max-h-[75%] object-contain" onError={() => setBroken(true)} />;
+  if (broken) return null;
+  return <img src={src} alt={alt} className="w-full h-full object-cover" onError={() => setBroken(true)} />;
 }
 
 function TiltCard({ children }: { children: React.ReactNode }) {
@@ -71,20 +71,21 @@ type WorkItem = {
   title: string; cat: string; color: string; accent: string;
   gradFrom: string; gradTo: string;
   initial: string; stat: string; statLabel: string;
+  logo?: string;
 };
 
 const pakWorks: WorkItem[] = [
-  { title: "The Consorts Hotels & Resorts", cat: "Hospitality", color: "#c9a96e", accent: "#ffffff", gradFrom: "#2a1a0a", gradTo: "#14100a", initial: "CH", stat: "5★",   statLabel: "Brand Positioning" },
-  { title: "Virconia Perfumes",             cat: "Luxury",      color: "#9b59b6", accent: "#ffffff", gradFrom: "#1e0a2a", gradTo: "#110616", initial: "VP", stat: "40K+", statLabel: "Monthly Reach"     },
-  { title: "Bushirts by Mir Dilawer",       cat: "Fashion",     color: "#e74c3c", accent: "#ffffff", gradFrom: "#2a0a0a", gradTo: "#160606", initial: "BM", stat: "3×",   statLabel: "Sales Growth"      },
-  { title: "Proctor Exam Taker",            cat: "EdTech",      color: "#3498db", accent: "#ffffff", gradFrom: "#0a1a2a", gradTo: "#060e18", initial: "PE", stat: "10K+", statLabel: "Students Served"   },
-  { title: "Travel Wala",                   cat: "Travel",      color: "#ff6400", accent: "#ffffff", gradFrom: "#2a1000", gradTo: "#180800", initial: "TW", stat: "200+", statLabel: "Destinations"      },
-  { title: "Power-EX Lubricants",           cat: "B2B",         color: "#546b52", accent: "#ffffff", gradFrom: "#0a1a0a", gradTo: "#061006", initial: "PX", stat: "50+",  statLabel: "Business Partners" },
+  { title: "The Consorts Hotels & Resorts", cat: "Hospitality", color: "#c9a96e", accent: "#ffffff", gradFrom: "#2a1a0a", gradTo: "#14100a", initial: "CH", stat: "5★",   statLabel: "Brand Positioning", logo: "/logos/pakistan_logos/The consorts.png"        },
+  { title: "Virconia Perfumes",             cat: "Luxury",      color: "#9b59b6", accent: "#ffffff", gradFrom: "#1e0a2a", gradTo: "#110616", initial: "VP", stat: "40K+", statLabel: "Monthly Reach",     logo: "/logos/pakistan_logos/Virconia.png"             },
+  { title: "Bushirts by Mir Dilawer",       cat: "Fashion",     color: "#e74c3c", accent: "#ffffff", gradFrom: "#2a0a0a", gradTo: "#160606", initial: "BM", stat: "3×",   statLabel: "Sales Growth",      logo: "/logos/pakistan_logos/Bushirts.png"             },
+  { title: "Proctor Exam Taker",            cat: "EdTech",      color: "#3498db", accent: "#ffffff", gradFrom: "#0a1a2a", gradTo: "#060e18", initial: "PE", stat: "10K+", statLabel: "Students Served",   logo: "/logos/pakistan_logos/Proctor Exam Taker.png"  },
+  { title: "Travel Wala",                   cat: "Travel",      color: "#ff6400", accent: "#ffffff", gradFrom: "#2a1000", gradTo: "#180800", initial: "TW", stat: "200+", statLabel: "Destinations",      logo: "/logos/pakistan_logos/Travel Wala.png"          },
+  { title: "Power-EX Lubricants",           cat: "B2B",         color: "#546b52", accent: "#ffffff", gradFrom: "#0a1a0a", gradTo: "#061006", initial: "PX", stat: "50+",  statLabel: "Business Partners", logo: "/logos/pakistan_logos/Power-Ex Lubricants.png" },
 ];
 
 const uaeWorks: WorkItem[] = [
-  { title: "Aqua Pure",        cat: "Brand Identity", color: "#6b9b7a", accent: "#ffffff", gradFrom: "#2d5448", gradTo: "#162e28", initial: "AP", stat: "3×",   statLabel: "ROI"       },
-  { title: "Beyjeem",          cat: "Social Media",   color: "#ff6400", accent: "#ffffff", gradFrom: "#aa4200", gradTo: "#5c1e00", initial: "BJ", stat: "10K+", statLabel: "Followers" },
+  { title: "Aqua Pure",        cat: "Brand Identity", color: "#6b9b7a", accent: "#ffffff", gradFrom: "#2d5448", gradTo: "#162e28", initial: "AP", stat: "3×",   statLabel: "ROI",       logo: "/logos/UAE Logos/logo transparent.png" },
+  { title: "Beyjeem",          cat: "Social Media",   color: "#ff6400", accent: "#ffffff", gradFrom: "#aa4200", gradTo: "#5c1e00", initial: "BJ", stat: "10K+", statLabel: "Followers", logo: "/logos/UAE Logos/beyjeem.jpg"           },
   { title: "Aesthetic Clinic", cat: "Branding",       color: "#c9a96e", accent: "#c9a96e", gradFrom: "#2a1e0c", gradTo: "#1a1408", initial: "AC", stat: "5×",   statLabel: "Enquiries" },
   { title: "Specialty Cafe",   cat: "Content",        color: "#9b7a4a", accent: "#ffffff", gradFrom: "#2a1e10", gradTo: "#1a1208", initial: "SC", stat: "200%", statLabel: "Footfall"  },
 ];
@@ -550,6 +551,13 @@ export default function HomePage() {
                       {/* Top accent bar */}
                       <div className="absolute top-0 left-0 right-0 h-[3px]"
                         style={{ background: `linear-gradient(90deg, ${w.color}, ${w.color}44)` }} />
+
+                      {/* Client logo — full art area */}
+                      {w.logo && (
+                        <div className="absolute inset-0 z-[5]">
+                          <WorkLogoImage src={w.logo} alt={w.title} />
+                        </div>
+                      )}
 
                       {/* Bottom dark fade into card */}
                       <div className="absolute bottom-0 left-0 right-0 h-12"
