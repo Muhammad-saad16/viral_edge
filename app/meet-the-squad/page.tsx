@@ -81,7 +81,6 @@ const team = [
   { initials: "FF", name: "Fizha Farukh",         role: "Creative Head",                color: "#3a4e39", photo: "/Squad/Fizha Farukh _ Creative Head.png"                       },
   { initials: "NA", name: "Nida Asim",             role: "Content Head",                 color: "#546b52", photo: "/Squad/Nida Asim _ Content Head.png"                           },
   { initials: "AA", name: "Agha Alamdar Abbas",   role: "Graphic Designer",             color: "#ff6400", photo: "/Squad/Agha Alamdar Abbas _ Graphic Designer.png"              },
-  { initials: "IA", name: "Ifrah Asif",            role: "Business Dev Executive",       color: "#3a4e39", photo: "/Squad/Ifrah Asif _ Business Development Executive.png"        },
   { initials: "SH", name: "Syed Assam Hassan",    role: "Operations Executive",         color: "#546b52", photo: "/Squad/Syed Assam Hassan _ Operations Executive.png"               },
 ];
  

@@ -44,8 +44,8 @@ export default function Portfolio() {
   :root {
     --cream: #F4EDE3;
     --dark: #1B2416;
-    --orange: #E55A1C;
-    --sage: #7A9B5F;
+    --orange: #ff6400;
+    --sage: #546b52;
     --muted: #9A9080;
     --card-bg: #FFFFFF;
     --border: rgba(27,36,22,0.10);
