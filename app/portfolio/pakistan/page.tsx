@@ -37,7 +37,7 @@ export default function Portfolio() {
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SQRD Digital — Creative Portfolio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Instrument+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -54,7 +54,7 @@ export default function Portfolio() {
   html { scroll-behavior: smooth; }
 
   body {
-    font-family: 'Instrument Sans', sans-serif;
+    font-family: 'Poppins', sans-serif;
     background: var(--cream);
     color: var(--dark);
     min-height: 100vh;
@@ -104,7 +104,7 @@ export default function Portfolio() {
     border: none;
     border-radius: 100px;
     padding: 10px 24px;
-    font-family: 'Instrument Sans', sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-size: 13px;
     font-weight: 500;
     cursor: pointer;
@@ -145,7 +145,7 @@ export default function Portfolio() {
   }
 
   h1 {
-    font-family: 'Syne', sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-size: clamp(56px, 7vw, 88px);
     font-weight: 800;
     line-height: 0.92;
@@ -181,7 +181,7 @@ export default function Portfolio() {
   }
 
   .stat .num {
-    font-family: 'Syne', sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-size: 52px;
     font-weight: 700;
     line-height: 1;
@@ -223,7 +223,7 @@ export default function Portfolio() {
     border: 1px solid var(--border);
     border-radius: 100px;
     padding: 7px 18px;
-    font-family: 'Instrument Sans', sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-size: 12px;
     color: var(--muted);
     cursor: pointer;
@@ -313,7 +313,7 @@ export default function Portfolio() {
   }
 
   .brand-name {
-    font-family: 'Syne', sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-size: 17px;
     font-weight: 700;
     color: var(--dark);
@@ -451,7 +451,7 @@ export default function Portfolio() {
     right: -20px;
     top: 50%;
     transform: translateY(-50%);
-    font-family: 'Syne', sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-size: 160px;
     font-weight: 800;
     color: rgba(255,255,255,0.03);
@@ -461,7 +461,7 @@ export default function Portfolio() {
   }
 
   .cta-left h2 {
-    font-family: 'Syne', sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-size: 40px;
     font-weight: 700;
     color: var(--cream);
@@ -488,7 +488,7 @@ export default function Portfolio() {
     border: none;
     border-radius: 100px;
     padding: 18px 42px;
-    font-family: 'Instrument Sans', sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-size: 14px;
     font-weight: 500;
     cursor: pointer;

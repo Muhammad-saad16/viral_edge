@@ -40,7 +40,7 @@ export default function Portfolio() {
 <title>Beyjeem UAE, Case Study | SQRDDigital</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 :root {
@@ -52,7 +52,7 @@ export default function Portfolio() {
   --border: rgba(20,16,10,0.1);
 }
 html { scroll-behavior: smooth; }
-body { background: var(--black); color: var(--white); font-family: 'DM Sans', sans-serif; font-weight: 300; overflow-x: hidden; }
+body { background: var(--black); color: var(--white); font-family: 'Poppins', sans-serif; font-weight: 300; overflow-x: hidden; }
 
 nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
@@ -61,7 +61,7 @@ nav {
   background: rgba(244,240,235,0.97); backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
 }
-.nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 3px; color: var(--white); text-decoration: none; }
+.nav-logo { font-family: 'Poppins', sans-serif; font-size: 22px; letter-spacing: 3px; color: var(--white); text-decoration: none; }
 .nav-logo span { color: var(--red); }
 .nav-back { display: flex; align-items: center; gap: 8px; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gray); text-decoration: none; transition: color 0.2s; }
 .nav-back:hover { color: var(--white); }
@@ -73,7 +73,7 @@ nav {
 }
 .hero-bg-text {
   position: absolute; top: 50%; right: -20px; transform: translateY(-50%);
-  font-family: 'Bebas Neue', sans-serif; font-size: 240px; color: rgba(20,16,10,0.04);
+  font-family: 'Poppins', sans-serif; font-size: 240px; color: rgba(20,16,10,0.04);
   letter-spacing: 8px; line-height: 1; pointer-events: none; white-space: nowrap;
 }
 .hero-accent { position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: var(--red); opacity: 0.5; }
@@ -81,9 +81,9 @@ nav {
 .case-tag { display: inline-flex; align-items: center; gap: 10px; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--red); margin-bottom: 28px; }
 .case-tag::before { content: ''; width: 24px; height: 1px; background: var(--red); }
 
-.case-hero-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(60px, 7vw, 110px); line-height: 0.92; letter-spacing: 2px; margin-bottom: 16px; }
+.case-hero-title { font-family: 'Poppins', sans-serif; font-size: clamp(60px, 7vw, 110px); line-height: 0.92; letter-spacing: 2px; margin-bottom: 16px; }
 .case-hero-title .red { color: var(--red); }
-.case-hero-title .italic { font-family: 'DM Serif Display', serif; font-style: italic; color: rgba(20,16,10,0.45); font-size: 0.82em; }
+.case-hero-title .italic { font-family: 'Poppins', serif; font-style: italic; color: rgba(20,16,10,0.45); font-size: 0.82em; }
 
 .case-hero-sub { font-size: 16px; color: rgba(20,16,10,0.45); max-width: 560px; line-height: 1.75; margin-bottom: 60px; }
 
@@ -96,7 +96,7 @@ nav {
 .results-bar { display: grid; grid-template-columns: repeat(4,1fr); border-top: 1px solid rgba(255,100,0,0.2); border-bottom: 1px solid rgba(255,100,0,0.2); background: rgba(255,100,0,0.06); }
 .result-item { padding: 40px; text-align: center; border-right: 1px solid var(--border); }
 .result-item:last-child { border-right: none; }
-.result-num { font-family: 'Bebas Neue', sans-serif; font-size: 56px; color: var(--white); letter-spacing: 1px; line-height: 1; }
+.result-num { font-family: 'Poppins', sans-serif; font-size: 56px; color: var(--white); letter-spacing: 1px; line-height: 1; }
 .result-num span { color: var(--red); }
 .result-label { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: rgba(20,16,10,0.45); margin-top: 8px; }
 .result-note { font-size: 11px; color: var(--red); margin-top: 4px; font-style: italic; opacity: 0.65; }
@@ -108,8 +108,8 @@ section.case-section:last-of-type { border-bottom: none; }
 .section-label { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--red); margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
 .section-label::before { content: ''; width: 20px; height: 1px; background: var(--red); }
 
-.section-heading { font-family: 'Bebas Neue', sans-serif; font-size: clamp(36px,4vw,60px); letter-spacing: 1.5px; line-height: 1; margin-bottom: 40px; }
-.section-heading em { font-family: 'DM Serif Display', serif; font-style: italic; color: rgba(20,16,10,0.35); }
+.section-heading { font-family: 'Poppins', sans-serif; font-size: clamp(36px,4vw,60px); letter-spacing: 1.5px; line-height: 1; margin-bottom: 40px; }
+.section-heading em { font-family: 'Poppins', serif; font-style: italic; color: rgba(20,16,10,0.35); }
 
 .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
 
@@ -121,7 +121,7 @@ section.case-section:last-of-type { border-bottom: none; }
 .challenge-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 2px; background: var(--border); margin-top: 20px; }
 .challenge-card { background: var(--black); padding: 36px 30px; transition: background 0.3s, transform 0.3s; }
 .challenge-card:hover { background: rgba(20,16,10,0.03); transform: translateY(-2px); }
-.challenge-num { font-family: 'Bebas Neue', sans-serif; font-size: 48px; color: rgba(20,16,10,0.06); line-height: 1; margin-bottom: 12px; }
+.challenge-num { font-family: 'Poppins', sans-serif; font-size: 48px; color: rgba(20,16,10,0.06); line-height: 1; margin-bottom: 12px; }
 .challenge-title { font-size: 14px; font-weight: 500; color: var(--white); margin-bottom: 8px; }
 .challenge-desc { font-size: 13px; color: var(--gray); line-height: 1.65; }
 
@@ -130,7 +130,7 @@ section.case-section:last-of-type { border-bottom: none; }
 .strategy-item::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: var(--red); transform: scaleY(0); transition: transform 0.3s; transform-origin: bottom; }
 .strategy-item:hover { background: rgba(20,16,10,0.02); }
 .strategy-item:hover::before { transform: scaleY(1); }
-.strategy-num { font-family: 'Bebas Neue', sans-serif; font-size: 28px; color: rgba(20,16,10,0.12); line-height: 1; }
+.strategy-num { font-family: 'Poppins', sans-serif; font-size: 28px; color: rgba(20,16,10,0.12); line-height: 1; }
 .strategy-title { font-size: 14px; font-weight: 500; color: var(--white); margin-bottom: 6px; }
 .strategy-desc { font-size: 13px; color: var(--gray); line-height: 1.6; }
 
@@ -139,7 +139,7 @@ section.case-section:last-of-type { border-bottom: none; }
 .timeline-phase::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--red); transform: scaleX(0); transition: transform 0.4s; transform-origin: left; }
 .timeline-phase:hover::before { transform: scaleX(1); }
 .phase-label { font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--red); margin-bottom: 12px; }
-.phase-title { font-family: 'Bebas Neue', sans-serif; font-size: 26px; letter-spacing: 1px; color: var(--white); margin-bottom: 16px; }
+.phase-title { font-family: 'Poppins', sans-serif; font-size: 26px; letter-spacing: 1px; color: var(--white); margin-bottom: 16px; }
 .phase-items { list-style: none; display: flex; flex-direction: column; gap: 9px; }
 .phase-items li { font-size: 13px; color: var(--gray); display: flex; align-items: flex-start; gap: 10px; }
 .phase-items li::before { content: '◆'; font-size: 5px; color: var(--red); margin-top: 5px; flex-shrink: 0; }
@@ -147,7 +147,7 @@ section.case-section:last-of-type { border-bottom: none; }
 .results-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; background: var(--border); margin-top: 40px; }
 .result-card { background: var(--black); padding: 36px 28px; transition: background 0.3s, transform 0.3s; cursor: default; }
 .result-card:hover { background: rgba(255,100,0,0.06); transform: translateY(-2px); }
-.result-card-num { font-family: 'Bebas Neue', sans-serif; font-size: 52px; line-height: 1; color: var(--white); margin-bottom: 8px; }
+.result-card-num { font-family: 'Poppins', sans-serif; font-size: 52px; line-height: 1; color: var(--white); margin-bottom: 8px; }
 .result-card-num span { color: var(--red); }
 .result-card-label { font-size: 13px; font-weight: 500; color: var(--white); margin-bottom: 6px; }
 .result-card-desc { font-size: 12px; color: var(--gray); line-height: 1.55; }
@@ -156,21 +156,21 @@ section.case-section:last-of-type { border-bottom: none; }
 .result-card-fill.animated { width: var(--fill); }
 
 .testimonial-block { margin-top: 60px; padding: 52px 64px; border-left: 3px solid var(--red); background: rgba(20,16,10,0.04); }
-.testimonial-quote { font-family: 'DM Serif Display', serif; font-style: italic; font-size: 23px; line-height: 1.6; color: var(--white); margin-bottom: 32px; }
+.testimonial-quote { font-family: 'Poppins', serif; font-style: italic; font-size: 23px; line-height: 1.6; color: var(--white); margin-bottom: 32px; }
 .testimonial-author { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--red); }
 .testimonial-company { font-size: 12px; color: var(--gray); margin-top: 4px; letter-spacing: 1px; }
 
 .next-case { background: rgba(20,16,10,0.02); border-top: 1px solid var(--border); padding: 80px 60px; display: flex; justify-content: space-between; align-items: center; text-decoration: none; color: inherit; transition: background 0.3s; }
 .next-case:hover { background: rgba(20,16,10,0.04); }
 .next-label { font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gray); margin-bottom: 12px; }
-.next-title { font-family: 'Bebas Neue', sans-serif; font-size: 42px; letter-spacing: 1.5px; color: var(--white); }
+.next-title { font-family: 'Poppins', sans-serif; font-size: 42px; letter-spacing: 1.5px; color: var(--white); }
 .next-arrow { font-size: 32px; color: var(--red); transition: transform 0.3s; }
 .next-case:hover .next-arrow { transform: translateX(8px); }
 
 .cta-banner { background: var(--black); border-top: 1px solid var(--border); padding: 100px 60px; text-align: center; position: relative; overflow: hidden; }
 .cta-banner::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 100%, rgba(255,100,0,0.07) 0%, transparent 60%); pointer-events: none; }
-.cta-banner-headline { font-family: 'Bebas Neue', sans-serif; font-size: clamp(48px,5vw,80px); letter-spacing: 2px; margin-bottom: 16px; position: relative; }
-.cta-banner-headline em { font-family: 'DM Serif Display', serif; font-style: italic; color: rgba(20,16,10,0.35); }
+.cta-banner-headline { font-family: 'Poppins', sans-serif; font-size: clamp(48px,5vw,80px); letter-spacing: 2px; margin-bottom: 16px; position: relative; }
+.cta-banner-headline em { font-family: 'Poppins', serif; font-style: italic; color: rgba(20,16,10,0.35); }
 .cta-banner-sub { font-size: 15px; color: rgba(20,16,10,0.45); margin-bottom: 40px; position: relative; }
 .cta-buttons { display: flex; gap: 14px; justify-content: center; align-items: center; flex-wrap: wrap; position: relative; }
 .btn-primary { background: var(--red); color: #f4f0eb; text-decoration: none; padding: 14px 36px; font-size: 12px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; transition: all 0.2s; }
@@ -180,7 +180,7 @@ section.case-section:last-of-type { border-bottom: none; }
 
 footer { background: #ece8e2; border-top: 1px solid var(--border); padding: 32px 60px; display: flex; justify-content: space-between; align-items: center; }
 footer p { font-size: 12px; color: rgba(20,16,10,0.35); }
-.footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 3px; color: rgba(20,16,10,0.45); text-decoration: none; }
+.footer-logo { font-family: 'Poppins', sans-serif; font-size: 20px; letter-spacing: 3px; color: rgba(20,16,10,0.45); text-decoration: none; }
 .footer-logo span { color: rgba(224,48,48,0.7); }
 
 .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.75s cubic-bezier(0.16,1,0.3,1), transform 0.75s cubic-bezier(0.16,1,0.3,1); }
@@ -206,12 +206,17 @@ footer p { font-size: 12px; color: rgba(20,16,10,0.35); }
   .cta-banner { padding: 70px 24px; }
   footer { padding: 24px; flex-direction: column; gap: 12px; text-align: center; }
 }
+.nav-logo, .hero-bg-text, .case-hero-title, .section-heading, .challenge-num, .strategy-num, .phase-title, .result-num, .result-card-num, .next-title, .cta-banner-headline, .footer-logo { font-weight: 900; }
+.testimonial-quote { font-weight: 300; font-style: italic; }
+.case-hero-title .italic, .section-heading em, .cta-banner-headline em { font-weight: 300; font-style: italic; }
+.client-logo { height: 38px; display: flex; align-items: center; justify-content: center; background: #fff; border-radius: 8px; padding: 5px 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.10); }
+.client-logo img { height: 100%; width: auto; max-width: 110px; object-fit: contain; }
 </style>
 </head>
 <body>
 
 <nav>
-  <a href="https://viral-edge.vercel.app/" class="nav-logo">SQRD<span>Digital</span></a>
+  <div class="client-logo"><img src="/logos/UAE Logos/beyjeem.jpg" alt="Beyjeem Photography" /></div>
   <a href="https://viral-edge.vercel.app/portfolio" class="nav-back">All Case Studies</a>
 </nav>
 
