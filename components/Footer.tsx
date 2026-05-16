@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { useGeoRegion } from "@/hooks/useGeoRegion";
 
 const quickLinks = [
   { href: "/",               label: "Home"          },
@@ -9,7 +12,32 @@ const quickLinks = [
   { href: "/contact",        label: "Talk to Us"    },
 ];
 
+const pakContact = {
+  officeLabel: "Pakistan Office",
+  cityBadge: "Karachi",
+  cityLine: "Karachi, Pakistan",
+  address: ["Office No. 4, 2nd Floor, Building No. 17C", "Ittehad Ln. 12, Phase 2 Ext", "Defence Housing Authority, Karachi, Pakistan"],
+  phone: "+92 333 237 1519",
+  phoneHref: "tel:+923332371519",
+  email: "sqrd.digital@gmail.com",
+  emailHref: "mailto:sqrd.digital@gmail.com",
+};
+
+const uaeContact = {
+  officeLabel: "UAE Office",
+  cityBadge: "Abu Dhabi",
+  cityLine: "Abu Dhabi, UAE",
+  address: ["Building# 55, Floor# O-2", "Airport Road, Al Manhal", "Abu Dhabi, UAE"],
+  phone: "+971 55 124 9617",
+  phoneHref: "tel:+971551249617",
+  email: "sqrd.ae@gmail.com",
+  emailHref: "mailto:sqrd.ae@gmail.com",
+};
+
 export default function Footer() {
+  const region = useGeoRegion();
+  const contact = region === "PAK" ? pakContact : uaeContact;
+
   return (
     <footer className="bg-sage-dark text-white">
       <div className="h-0.5 bg-gradient-to-r from-sage via-orange to-sage opacity-60" />
@@ -19,7 +47,6 @@ export default function Footer() {
 
           {/* Brand */}
           <div>
-            {/* Logo — original colors, no filter */}
             <img
               src="/FIle.psd.png"
               alt="SQRD Digital"
@@ -76,23 +103,25 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* UAE Contact only */}
+          {/* Contact — geo-conditional */}
           <div>
             <h4 className="text-[10px] font-black tracking-[0.2em] uppercase text-white/30 mb-1">
-              UAE Office
+              {contact.officeLabel}
             </h4>
-            <span className="inline-block text-[9px] font-black uppercase tracking-widest text-orange bg-orange/15 px-2 py-0.5 rounded-full mb-5">Abu Dhabi</span>
+            <span className="inline-block text-[9px] font-black uppercase tracking-widest text-orange bg-orange/15 px-2 py-0.5 rounded-full mb-5">
+              {contact.cityBadge}
+            </span>
             <address className="not-italic space-y-3 text-sm text-white/45">
               <p className="leading-relaxed">
-                Building# 55, Floor# O-2<br />
-                Airport Road, Al Manhal<br />
-                Abu Dhabi, UAE
+                {contact.address[0]}<br />
+                {contact.address[1]}<br />
+                {contact.address[2]}
               </p>
               <p>
-                <a href="tel:+971551249617" className="hover:text-orange transition-colors">+971 55 124 9617</a>
+                <a href={contact.phoneHref} className="hover:text-orange transition-colors">{contact.phone}</a>
               </p>
               <p>
-                <a href="mailto:sqrd.ae@gmail.com" className="hover:text-orange transition-colors">sqrd.ae@gmail.com</a>
+                <a href={contact.emailHref} className="hover:text-orange transition-colors">{contact.email}</a>
               </p>
             </address>
           </div>
@@ -104,7 +133,7 @@ export default function Footer() {
             &copy; SQRD Digital 2025. All rights reserved.
           </p>
           <p className="text-xs text-white/15">
-            Abu Dhabi, UAE
+            {contact.cityLine}
           </p>
         </div>
       </div>
