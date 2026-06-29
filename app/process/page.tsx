@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { useGeoRegion } from "@/hooks/useGeoRegion";
 
 const DiscoveryIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
@@ -74,6 +75,7 @@ const steps = [
 ];
 
 export default function ProcessPage() {
+  const region = useGeoRegion();
   return (
     <>
       {/* ══ HERO ══ */}
@@ -167,9 +169,9 @@ export default function ProcessPage() {
                 <Link href="/contact"
                   className="px-10 py-4 text-sm font-black text-sage bg-white hover:bg-white/90 hover:shadow-2xl hover:-translate-y-1 transition-all uppercase tracking-wide"
                   style={{ borderRadius: "40px" }}>
-                  Brief Us In
+                  Get your free growth analysis
                 </Link>
-                <a href="https://wa.me/922135395533" target="_blank" rel="noopener noreferrer"
+                <a href={region === "PAK" ? "https://wa.me/923332371519" : "https://wa.me/971551249617"} target="_blank" rel="noopener noreferrer"
                   className="flex items-center gap-2 px-10 py-4 text-sm font-black text-white border-2 border-white/30 hover:border-white hover:bg-white/10 hover:-translate-y-1 transition-all uppercase tracking-wide"
                   style={{ borderRadius: "40px" }}>
                   Chat on WhatsApp

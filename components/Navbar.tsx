@@ -64,7 +64,7 @@ export default function Navbar() {
               href="/contact"
               className="hidden md:inline-flex items-center px-5 py-2.5 text-sm font-bold text-white bg-orange rounded-full hover:bg-orange/90 transition-colors shadow-md shadow-orange/20"
             >
-              Get More Customers
+              Get your free growth analysis
             </Link>
 
             {/* Mobile hamburger */}
@@ -108,7 +108,7 @@ export default function Navbar() {
                 href="/contact"
                 className="mt-2 flex justify-center py-3 text-sm font-bold text-white bg-orange rounded-full"
               >
-                Get More Customers
+                Get your free growth analysis
               </Link>
             </div>
           </motion.div>

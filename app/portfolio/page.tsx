@@ -474,8 +474,8 @@ export default function PortfolioPage() {
                   className="h-full"
                 >
                   <TiltCard>
-                    <Link href={cs.route}
-                      className="group relative flex flex-col h-full rounded-3xl overflow-hidden"
+                    <div
+                      className="relative flex flex-col h-full rounded-3xl overflow-hidden cursor-default"
                       style={{ background: "#1a2a1a", border: `1.5px solid ${cs.color}33` }}
                     >
                       {/* ── Abstract art area ── */}
@@ -579,23 +579,14 @@ export default function PortfolioPage() {
                               </span>
                             ))}
                           </div>
-                          <span className="inline-flex items-center gap-1.5 text-[10px] font-black uppercase tracking-wider group-hover:gap-2.5 transition-all duration-300"
-                            style={{ color: cs.color }}>
-                            View
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"
-                              className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-300">
-                              <path d="M5 12h14M12 5l7 7-7 7" />
-                            </svg>
-                          </span>
                         </div>
                       </div>
 
-                      {/* Card edge glow on hover */}
                       <div
-                        className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                        style={{ boxShadow: `inset 0 0 0 1.5px ${cs.color}55` }}
+                        className="absolute inset-0 rounded-3xl pointer-events-none"
+                        style={{ boxShadow: `inset 0 0 0 1.5px ${cs.color}22` }}
                       />
-                    </Link>
+                    </div>
                   </TiltCard>
                 </motion.div>
               ))}
@@ -619,7 +610,7 @@ export default function PortfolioPage() {
           </p>
           <Link href="/contact"
             className="inline-flex items-center px-10 py-4 text-sm font-black text-sage bg-white rounded-full hover:bg-white/90 hover:shadow-2xl hover:-translate-y-1 transition-all uppercase tracking-wide">
-            Work with SQRD
+            Get your free growth analysis
           </Link>
         </div>
       </section>
